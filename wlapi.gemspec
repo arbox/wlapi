@@ -1,0 +1,41 @@
+lib_path = File.expand_path(File.dirname(__FILE__) + '/lib')
+$LOAD_PATH.unshift(lib_path) unless $LOAD_PATH.include?(lib_path)
+
+require 'rake'
+require 'wlapi/version'
+
+# Define a constant here to use this spec in the Rakefile.
+Gem::Specification.new do |s|
+  s.name = 'wlapi'
+  # it is the description for 'gem list -d'
+  s.summary = 'WLAPI is a programmatic API for web services provided by the project Wortschatz, University of Leipzig. Use different linguistic services such as synonym and collocation search.'
+  s.description = 'WLAPI is a programmatic API for web services provided by the project Wortschatz, University of Leipzig. These services are a great source of linguistic knowledge for morphological, syntactic and semantic analysis of German both for traditional and Computational Linguistics (CL). Use this API to gain data on word frequencies, left and right neighbours, collocations and semantic similarity. Check it out if you are interested in Natural Language Processing (NLP) and Human Language Technology (HLT).'
+  s.rubyforge_project = 'wlapi'
+  s.version = WLAPI::VERSION
+  s.author = "Andrei Beliankou"
+  s.email = "a.belenkow@uni-trier.de"
+  s.homepage = "http://www.uni-trier.de/index.php?id=34451"
+  s.add_runtime_dependency('savon', '>=0.8.0')
+  s.add_development_dependency('rdoc', '>=3.9.1')
+  s.add_development_dependency('bundler')
+  s.add_development_dependency('rdoc')
+  s.add_development_dependency('yard')
+  s.add_development_dependency('fakeweb')
+  s.add_development_dependency('rake')
+  if RUBY_VERSION =~ /^1\.8/
+    s.add_development_dependency('ruby-debug')
+  elsif RUBY_VERSION =~ /^1\.9/
+    s.add_development_dependency('ruby-debug19')
+  end
+  s.extra_rdoc_files = ['README', 'LICENSE', 'CHANGELOG']
+  s.rdoc_options = ['-m', 'README']
+  s.platform = Gem::Platform::RUBY
+  s.required_ruby_version = '>=1.8.5'
+  s.files = FileList['lib/**/*.rb',
+                     'README',
+                     'LICENSE',
+                     'CHANGELOG',
+                     '.yardopts',
+                     'test/**/*'].to_a
+  s.test_files = FileList['test/**/*'].to_a
+end

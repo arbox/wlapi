@@ -1,0 +1,86 @@
+= WLAPI
+
+* {RubyGems}[http://rubygems.org/gems/wlapi]
+* Developers {Homepage}[http://www.uni-trier.de/index.php?id=24140]
+* {WLAPI Project Page}[http://wlapi.rubyforge.org/]
+
+== DESCRIPTION
+WLAPI is a programmatic API for web services provided by the project
+{Wortschatz}[http://wortschatz.uni-leipzig.de/],
+University of Leipzig. These services are a great source of linguistic knowledge
+for morphological, syntactic and semantic analysis of German both for traditional
+and Computational Linguistics (CL).
+
+Use this API to gain data on word frequencies, left and right neighbours,
+collocations and semantic similarity. Check it out if you are interested
+in Natural Language Processing (NLP) and Human Language Technology (HLT).
+=== Implemented Features
+You can use the following search methods:
+* baseform;
+* cooccurrences;
+* cooccurrences_all;
+* domain;
+* experimental_synonyms;
+* frequencies;
+* intersection;
+* left_collocation_finder;
+* left_neighbours;
+* right_collocation_finder;
+* right_neighbours;
+* sentences;
+* similarity;
+* synonyms;
+* thesaurus;
+* wordforms.
+
+== INSTALLATION
+WLAPI is provided as a .gem package. Simply install it via
+{RubyGems}[http://rubygems.org/gems/wlapi].
+To install WLAPI ussue the following command:
+  $ gem install wlapi
+
+You might want to install versions prior to +0.8.0+, if you are bound on
+the old implementations of {savon}[http://savonrb.com/]:
+  $ gem install wlapi -v 0.7.4
+
+If you want to do a system wide installation, do this as root
+(possibly using +sudo+).
+
+Alternatively use your Gemfile for dependency management.
+
+
+== SYNOPSIS
+
+Basic usage is very simple:
+  $ require 'wlapi'
+  $ api = WLAPI::API.new
+  $ api.synonyms('Haus', 15) # returns an array with string values (UTF8 encoded)
+  $ api.domain('Auto') # => Array
+
+If you are going to send mass requests, please contact the support team
+of the project {Wortschatz}[http://wortschatz.uni-leipzig.de/], get your private
+credentials and instantiate an authenticated client:
+  $ require 'wlapi'
+  $ api = WLAPI::API.new(username, password)
+
+See documentation in the WLAPI::API class for details
+on particular search methods.
+
+== SUPPORT
+If you have question, bug reports or any suggestions, please drop me an email :) 
+Any help is deeply appreciated!
+
+== CHANGELOG
+For details on future plan and working progress see CHANGELOG.
+
+== CAUTION
+This library is <b>work in process</b>! Though the interface is mostly complete,
+you might face some not implemented features.
+
+Please contact me with your suggestions, bug reports and feature requests.
+== LICENSE
+
+WLAPI is a copyrighted software by Andrei Beliankou, 2010, 2011
+
+You may use, redistribute and change it under the terms
+provided in the LICENSE file.

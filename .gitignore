@@ -1,0 +1,9 @@
+pkg
+html
+ydoc
+rdoc
+doc
+*.gem
+.yardoc
+.bundle
+.rvmrc
