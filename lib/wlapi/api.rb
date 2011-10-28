@@ -271,16 +271,6 @@ module WLAPI
       arg3 = ['Limit', limit]
 
     end
-
-    def intersection(word1, word2, limit = 10)
-      arg1 = ['Wort 1', word1]
-      arg2 = ['Wort 2', word2]
-      arg3 = ['Limit', limit]
-      # we are not going to implement it now
-      answer = query(@cl_Kookurrenzschnitt, arg1, arg2, arg3)
-      
-      get_answer(answer)
-    end
     
     private
     
@@ -290,48 +280,52 @@ module WLAPI
     # with keys and values for the soap query.
     def query(cl, *args)
       # WSDL is disabled since calling the server for wsdl can last too long.
-      resp = cl.request(:urn, :execute) do |soap|
 
-        # Every service has a different namespace.
-        soap.namespaces['xmlns:urn'] = cl.wsdl.namespace
-        
-        soap.namespaces['xmlns:dat'] =
-          "http://datatypes.webservice.wortschatz.uni_leipzig.de"
-
-        v = []
-        body = {
-          'urn:objRequestParameters' => {
-            'urn:corpus' => 'de',
-            'urn:parameters' => {
-              'urn:dataVectors' => v
+      begin
+        resp = cl.request(:urn, :execute) do |soap|
+          
+          # Every service has a different namespace.
+          soap.namespaces['xmlns:urn'] = cl.wsdl.namespace
+          
+          soap.namespaces['xmlns:dat'] =
+            "http://datatypes.webservice.wortschatz.uni_leipzig.de"
+          
+          v = []
+          body = {
+            'urn:objRequestParameters' => {
+              'urn:corpus' => 'de',
+              'urn:parameters' => {
+                'urn:dataVectors' => v
+              }
             }
           }
-        }
-
-        # Setting the first argument (usually 'Wort').
-        v << {'dat:dataRow'=>[
-                              args[0][0],
-                              args[0][1]
-                             ]
-        } if args[0]
-        # Setting the second argument (usually 'Limit').
-        v << {'dat:dataRow'=>[
-                              args[1][0],
-                              args[1][1]
-                             ]
-        } if args[1]
-        # Setting the third argument (no common value)
-        v << {'dat:dataRow'=>[
-                              args[2][0],
-                              args[2][1]
-                             ]
-        } if args[2]
-
-        soap.body = body
-        warn(soap.to_xml) if $DEBUG
-
+          
+          # Setting the first argument (usually 'Wort').
+          v << {'dat:dataRow'=>[
+                                args[0][0],
+                                args[0][1]
+                               ]
+          } if args[0]
+          # Setting the second argument (usually 'Limit').
+          v << {'dat:dataRow'=>[
+                                args[1][0],
+                                args[1][1]
+                               ]
+          } if args[1]
+          # Setting the third argument (no common value)
+          v << {'dat:dataRow'=>[
+                                args[2][0],
+                                args[2][1]
+                               ]
+          } if args[2]
+          
+          soap.body = body
+          warn(soap.to_xml) if $DEBUG
+          
+        end
+      rescue Savon::SOAP::Fault => e
       end
-    rescue Savon::SOAP::Fault => e
+      
       doc = Document.new(resp.to_xml)
       warn(doc) if $DEBUG
       
