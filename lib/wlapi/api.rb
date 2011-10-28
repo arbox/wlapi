@@ -33,7 +33,6 @@ module WLAPI
         :Synonyms => "#{endpoint}/Synonyms",
         :Sachgebiet => "#{endpoint}/Sachgebiet",
         :Frequencies => "#{endpoint}/Frequencies",
-        :Kookurrenzschnitt => "#{endpoint}/Kookkurrenzschnitt",
         :ExperimentalSynonyms => "#{endpoint}/ExperimentalSynonyms",
         :RightCollocationFinder => "#{endpoint}/RightCollocationFinder",
         :LeftCollocationFinder => "#{endpoint}/LeftCollocationFinder",
@@ -43,7 +42,7 @@ module WLAPI
         :RightNeighbours => "#{endpoint}/RightNeighbours",
         :Sentences => "#{endpoint}/Sentences",
         :Cooccurrences => "#{endpoint}/Cooccurrences"
-        # no MARSService and Kreuzwortrraetsel
+        # no MARSService, Kookurrenzschnitt and Kreuzwortrraetsel
       }
       
       # cl short for client.
@@ -259,33 +258,18 @@ module WLAPI
       arg1 = ['Wort', word]
       arg2 = ['Mindestsignifikanz', sign]
       arg3 = ['Limit', limit]
-      raise NotImplementedError, 'Not implemented yet!'
+
     end
     
     # Returns statistically significant co-occurrences of the input word.
-    # However, it searches in the unrestricted version of the co-occurrences table
-    # as in the Cooccurrences services,
+    # However, it searches in the unrestricted version of the co-occurrences
+    # table as in the Cooccurrences services,
     # which means significantly longer wait times.
     def cooccurrences_all(word, sign, limit = 10)
       arg1 = ['Wort', word]
       arg2 = ['Mindestsignifikanz', sign]
       arg3 = ['Limit', limit]
-      raise NotImplementedError, 'Not implemented yet!'
-    end
-    
-    # Returns the intersection of the co-occurrences of the two given words.
-    # The result set is ordered according to the sum of the significances
-    # in descending order. Note that due to the join involved,
-    # this make take some time.
-    #--
-    # let's call it intersection, not kookurrenzschnitt
-    # is being used INTERN, we need additional credentials
-    def intersection(word1, word2, limit = 10)
-      arg1 = ['Wort 1', word1]
-      arg2 = ['Wort 2', word2]
-      arg3 = ['Limit', limit]
-      # we are not going to implement it now
-      raise NotImplementedError, 'Will never be implemented!'
+
     end
     
     private

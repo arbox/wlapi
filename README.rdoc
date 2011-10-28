@@ -22,7 +22,6 @@ You can use the following search methods:
 * domain;
 * experimental_synonyms;
 * frequencies;
-* intersection;
 * left_collocation_finder;
 * left_neighbours;
 * right_collocation_finder;
@@ -32,6 +31,8 @@ You can use the following search methods:
 * synonyms;
 * thesaurus;
 * wordforms.
+
+There are three additional services by Wortschatz Leipzig: Kreuzworträtsel, MARS and Kookurrenzschnitt. They will not be implemented.
 
 == INSTALLATION
 WLAPI is provided as a .gem package. Simply install it via
