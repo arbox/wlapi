@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('bundler')
   s.add_development_dependency('rdoc')
   s.add_development_dependency('yard')
-  s.add_development_dependency('fakeweb')
   s.add_development_dependency('rake')
   s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.rdoc']
   s.rdoc_options = ['-m', 'README.rdoc']
