@@ -180,28 +180,53 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_similarity
-    response = @api.similarity(@word)
+    response = @api.similarity('Stuhl', 3)
     check_response(response)
 
+    expected_response = ["Stuhl", "Sessel", "26",
+                         "Stuhl", "Lehnstuhl", "24",
+                         "Stuhl", "Sofa", "21"] 
+    assert_equal(expected_response, response)   
   end
 
   def test_experimental_synonyms
-    response = @api.experimental_synonyms(@word)
+    response = @api.experimental_synonyms('Stuhl')
     check_response(response)
 
+    expected_response = ["Einrichtungsgegenstand", "v",
+                         "Bett", "v",
+                         "Lampe", "v",
+                         "Tisch", "v",
+                         "Schrank", "v",
+                         "Teppich", "v",
+                         "Gebrauchsmöbel", "v",
+                         "Möbelstück", "v",
+                         "Bank", "v",
+                         "Bord", "v"
+                        ]
+    assert_equal(expected_response, response)
   end
   
   # three parameters
   def test_right_collocation_finder
-    response = @api.right_collocation_finder(@word, 'V')
+    response = @api.right_collocation_finder('Stuhl', 'V', 3)
     check_response(response)
 
+    expected_response = ["Stuhl", "aufmöbeln", "V",
+                         "Stuhl", "aufreihen", "V",
+                         "Stuhl", "aufspringen", "V"
+                        ]
+    assert_equal(expected_response, response) 
   end
 
   def test_left_collocation_finder
-    response = @api.left_collocation_finder(@word, 'A')
+    response = @api.left_collocation_finder('Stuhl', 'A', 3)
     check_response(response)
-
+    expected_response = ["Hl", "A", "Stuhl",
+                         "abwaschbar", "A", "Stuhl",
+                         "alle", "A", "Stuhl"
+                        ]
+    assert_equal(expected_response, response) 
   end
 
   def test_cooccurrences
