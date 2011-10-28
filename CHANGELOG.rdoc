@@ -16,12 +16,17 @@ Initial release of the lib.
 
 == PLANNED
 === 0.8.2
-Introduce +nokogiri+ for parsing responses.
 Refactore all test and implement server response stubs with +fakeweb+.
 === 0.8.3
 Implement an error handling strategy.
 === 0.8.4
 Test the lib against mri, rbx, jruby, win rubies.
+=== 0.8.5
+Introduce +nokogiri+ for parsing responses.
+=== 0.8.6
+=== 0.8.7
+=== 0.8.8
+=== 0.8.9
 === 0.9.0
 === 1.0.0
 
