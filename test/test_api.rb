@@ -34,8 +34,31 @@ class TestApi < Test::Unit::TestCase
   end
 =end
   # one parameter
+
+  def test_availability_of_pulic_methods
+    methods = [:baseform,
+               :domain,
+               :wordforms,
+               :thesaurus,
+               :synonyms,
+               :sentences,
+               :left_neighbours,
+               :right_neighbours,
+               :similarity,
+               :experimental_synonyms,
+               :right_collocation_finder,
+               :left_collocation_finder,
+               :cooccurrences,
+               :cooccurrences_all,
+               :intersection,
+               :frequencies
+              ]
+
+    methods.each { |m| assert_respond_to(@api, m) }
+  end
+
+
   def test_frequencies
-    assert_respond_to(@api, :frequencies)
     assert_raise(ArgumentError) do
       @api.frequencies(@word, 5)
     end
@@ -52,7 +75,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_baseform
-    assert_respond_to(@api, :baseform)
     assert_raise(ArgumentError) do
       @api.baseform(@word, 5)
     end
@@ -69,7 +91,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_domain
-    assert_respond_to(@api, :domain)
     assert_raise(ArgumentError) do
       @api.domain(@word, 5)
     end
@@ -85,7 +106,6 @@ class TestApi < Test::Unit::TestCase
   
   # two parameters
   def test_wordforms
-    assert_respond_to(@api, :wordforms)
     assert_raise(ArgumentError) do
       @api.wordforms
     end
@@ -99,7 +119,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_thesaurus
-    assert_respond_to(@api, :thesaurus)
     assert_raise(ArgumentError) do
       @api.thesaurus
     end
@@ -113,7 +132,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_synonyms
-    assert_respond_to(@api, :synonyms)
     assert_raise(ArgumentError) do
       @api.synonyms
     end
@@ -127,7 +145,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_sentences
-    assert_respond_to(@api, :sentences)
     assert_raise(ArgumentError) do
       @api.sentences
     end
@@ -141,7 +158,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_left_neighbours
-    assert_respond_to(@api, :left_neighbours)
     assert_raise(ArgumentError) do
       @api.left_neighbours
     end
@@ -155,7 +171,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_right_neighbours
-    assert_respond_to(@api, :right_neighbours)
     assert_raise(ArgumentError) do
       @api.right_neighbours
     end
@@ -169,7 +184,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_similarity
-    assert_respond_to(@api, :similarity)
     assert_raise(ArgumentError) do
       @api.similarity
     end
@@ -183,7 +197,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_experimental_synonyms
-    assert_respond_to(@api, :experimental_synonyms)
     assert_raise(ArgumentError) do
       @api.experimental_synonyms
     end
@@ -198,8 +211,7 @@ class TestApi < Test::Unit::TestCase
   
   # three parameters
   def test_right_collocation_finder
-    assert_respond_to(@api, :right_collocation_finder)
-        assert_raise(ArgumentError) do
+    assert_raise(ArgumentError) do
       @api.right_collocation_finder
     end
     assert_raise(ArgumentError) do
@@ -212,7 +224,6 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_left_collocation_finder
-    assert_respond_to(@api, :left_collocation_finder)
     assert_raise(ArgumentError) do
       @api.left_collocation_finder
     end
