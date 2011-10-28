@@ -19,7 +19,7 @@ class TestApi < Test::Unit::TestCase
              :left_collocation_finder,
              :cooccurrences,
              :cooccurrences_all,
-             :intersection,
+#             :intersection,
              :frequencies
             ]
   def setup
@@ -230,22 +230,20 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_cooccurrences
-    assert_raise(NotImplementedError) do
-      @api.cooccurrences(@word, 1, 10)
-    end
+
   end
 
   def test_cooccurrences_all
-    assert_raise(NotImplementedError) do
-      @api.cooccurrences_all(@word, 1, 10)
-    end
+
   end
 
+=begin  
   def test_intersection
     assert_raise(NotImplementedError) do
       @api.intersection(@word, @word, 10)
     end
   end
+=end
 
 ################## HELPER METHODS ###############################################
   def check_response(response)

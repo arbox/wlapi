@@ -271,6 +271,16 @@ module WLAPI
       arg3 = ['Limit', limit]
 
     end
+
+    def intersection(word1, word2, limit = 10)
+      arg1 = ['Wort 1', word1]
+      arg2 = ['Wort 2', word2]
+      arg3 = ['Limit', limit]
+      # we are not going to implement it now
+      answer = query(@cl_Kookurrenzschnitt, arg1, arg2, arg3)
+      
+      get_answer(answer)
+    end
     
     private
     
@@ -321,7 +331,7 @@ module WLAPI
         warn(soap.to_xml) if $DEBUG
 
       end
-
+    rescue Savon::SOAP::Fault => e
       doc = Document.new(resp.to_xml)
       warn(doc) if $DEBUG
       
