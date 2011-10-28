@@ -19,7 +19,7 @@ class TestApi < Test::Unit::TestCase
              :left_collocation_finder,
              :cooccurrences,
              :cooccurrences_all,
-#             :intersection,
+             :intersection,
              :frequencies
             ]
   def setup
@@ -230,20 +230,31 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_cooccurrences
-
+    response = @api.cooccurrences('Haus', 10000)
+    check_response(response)
+    expected_response = ["Haus", "das", "11747"]
+    
+    assert_equal(expected_response, response) 
   end
 
   def test_cooccurrences_all
-
-  end
-
-=begin  
-  def test_intersection
-    assert_raise(NotImplementedError) do
-      @api.intersection(@word, @word, 10)
+    begin
+      @api.cooccurrences_all('Haus', 10000)
+    rescue RuntimeError => e
+      assert_match(/You're not allowed to access this service./, e.message)
     end
+    # Not possible to test without access credential.
   end
-=end
+
+  def test_intersection
+    begin
+      @api.intersection('Haus', 'Brot', 1)
+    rescue RuntimeError => e
+      assert_match(/You're not allowed to access this service./, e.message)
+    end
+    # Not possible to test without access credential.
+  end
+
 
 ################## HELPER METHODS ###############################################
   def check_response(response)
