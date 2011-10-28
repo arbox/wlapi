@@ -1,11 +1,27 @@
 # -*- coding: utf-8 -*-
 require 'test/unit'
-require 'fakeweb'
 require 'wlapi'
 
 
 class TestApi < Test::Unit::TestCase
 
+  METHODS = [:baseform,
+             :domain,
+             :wordforms,
+             :thesaurus,
+             :synonyms,
+             :sentences,
+             :left_neighbours,
+             :right_neighbours,
+             :similarity,
+             :experimental_synonyms,
+             :right_collocation_finder,
+             :left_collocation_finder,
+             :cooccurrences,
+             :cooccurrences_all,
+             :intersection,
+             :frequencies
+            ]
   def setup
     @api = WLAPI::API.new
     @word = 'Stuhl'
@@ -19,221 +35,173 @@ class TestApi < Test::Unit::TestCase
     assert(WLAPI::VERSION.is_a?(String))
     assert_equal(false, WLAPI::VERSION.empty?)
   end
-=begin
-  # It should generate a valid soap request for some input.
-  def test_soap_generation
-    file = 'test/data/soap_request.txt'
-    soap = File.read(file)
-    
-    url = 'http://wortschatz.uni-leipzig.de/axis/services/Thesaurus'
-    FakeWeb.register_uri(:post, url, :response => http_resp)
-
-    actual_api_answer = query.get
-    assert_instance_of(String, actual_api_answer, 'Not String!')
-    assert_equal(expected_api_answer, actual_api_answer)
-  end
-=end
-  # one parameter
 
   def test_availability_of_pulic_methods
-    methods = [:baseform,
-               :domain,
-               :wordforms,
+    METHODS.each { |m| assert_respond_to(@api, m) }
+  end
+
+  def test_for_absent_arguments
+    assert_raise(ArgumentError) do
+      METHODS.each { |m| @api.send(m) }
+    end
+  end
+
+  def test_for_redundant_arguments
+    one_par = [:frequencies,
+               :baseform,
+               :domain
+              ]
+    assert_raise(ArgumentError) do
+      one_par.each { |m| @api.send(m, 1, 2) }
+    end
+
+    two_par = [:wordforms,
                :thesaurus,
                :synonyms,
                :sentences,
                :left_neighbours,
                :right_neighbours,
                :similarity,
-               :experimental_synonyms,
-               :right_collocation_finder,
-               :left_collocation_finder,
-               :cooccurrences,
-               :cooccurrences_all,
-               :intersection,
-               :frequencies
+               :experimental_synonyms
               ]
-
-    methods.each { |m| assert_respond_to(@api, m) }
+    assert_raise(ArgumentError) do
+      two_par.each { |m| @api.send(m, 1, 2, 3) }
+    end
+    
+    three_par = [:right_collocation_finder,
+                 :left_collocation_finder,
+                 :cooccurrences,
+                 :cooccurrences_all,
+                 :intersection
+                ]
+    assert_raise(ArgumentError) do
+      three_par.each { |m| @api.send(m, 1, 2, 3, 4) }
+    end    
   end
 
-
+  # one parameter
   def test_frequencies
-    assert_raise(ArgumentError) do
-      @api.frequencies(@word, 5)
-    end
-    assert_raise(ArgumentError) do
-      @api.frequencies
-    end
-    response = @api.frequencies(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    response = @api.frequencies('Haus')
+    check_response(response)
+
     assert_equal(2, response.size)
     assert_match(/\d+/, response[0])
     assert_match(/\d+/, response[1])
+    assert_equal(["122072", "7"], response)
   end
 
   def test_baseform
-    assert_raise(ArgumentError) do
-      @api.baseform(@word, 5)
-    end
-    assert_raise(ArgumentError) do
-      @api.baseform
-    end
-    response = @api.baseform(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    response = @api.baseform('Autos')
+    check_response(response)
+
     assert_equal(2, response.size)
     assert_match(/\w+/, response[0])
     assert_match(/[AVN]/, response[1])
+    assert_equal(["Auto", "N"], response)
   end
 
   def test_domain
-    assert_raise(ArgumentError) do
-      @api.domain(@word, 5)
-    end
-    assert_raise(ArgumentError) do
-      @api.domain
-    end
-    response = @api.domain(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
-    # we cannot predict the minimal structure of the response
+    response = @api.domain('Buch')
+    check_response(response)
+
+    expected_response = ["Sprachwissenschaft",
+                         "Nachname",
+                         "Stadt",
+                         "Buchkunde/Buchhandel",
+                         "Motive",
+                         "Literarische/Motive/Stoffe/Gestalten",
+                         "Buchkunde/Buchhandel",
+                         "Papierherstellung/Graphische/Technik",
+                         "Buchkunde/Buchhandel",
+                         "Bücher",
+                         "Ort in D"
+                        ]
+    assert_equal(expected_response, response)
+    # We cannot predict the minimal structure of the response.
   end
   
   # two parameters
   def test_wordforms
-    assert_raise(ArgumentError) do
-      @api.wordforms
-    end
-    assert_raise(ArgumentError) do
-      @api.wordforms(1, 2, 3)
-    end
-    response = @api.wordforms(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    response = @api.wordforms('Buch')
+    check_response(response)
+
+    expected_response = ["Buch",
+                         "Bücher",
+                         "Büchern",
+                         "Buches",
+                         "Buchs",
+                         "Bucher"
+                        ]
+    assert_equal(expected_response, response)
   end
 
   def test_thesaurus
-    assert_raise(ArgumentError) do
-      @api.thesaurus
-    end
-    assert_raise(ArgumentError) do
-      @api.thesaurus(1, 2, 3)
-    end
-    response = @api.thesaurus(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    response = @api.thesaurus('Buch')
+    check_response(response)
+
+    expected_response = ["Buch", "Titel", "Werk", "Zeitung", "Band",
+                         "Literatur", "Zeitschrift", "Bruch", "Lektüre",
+                         "Schrift"]
+    assert_equal(expected_response, response)
   end
 
   def test_synonyms
-    assert_raise(ArgumentError) do
-      @api.synonyms
-    end
-    assert_raise(ArgumentError) do
-      @api.synonyms(1, 2, 3)
-    end
-    response = @api.synonyms(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    response = @api.synonyms('Brot')
+    check_response(response)
+
+    expected_response = ["Laib", "Brotlaib", "Laib", "Schnitte", "Stulle"]
+    assert_equal(expected_response, response)
   end
 
   def test_sentences
-    assert_raise(ArgumentError) do
-      @api.sentences
-    end
-    assert_raise(ArgumentError) do
-      @api.sentences(1, 2, 3)
-    end
-    response = @api.sentences(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    response = @api.sentences('Klasse', 1)
+    check_response(response)
+    expected_response = ["40829928",
+                         "Bei den Grünen war ich wohl im Urteil der politisch korrekten Klasse bei den Richtigen, auch wenn ich in ihren Augen das Falsche sagte."] 
+    assert_equal(expected_response, response)
   end
 
   def test_left_neighbours
-    assert_raise(ArgumentError) do
-      @api.left_neighbours
-    end
-    assert_raise(ArgumentError) do
-      @api.left_neighbours(1, 2, 3)
-    end
-    response = @api.left_neighbours(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    response = @api.left_neighbours('Stuhl', 2)
+    check_response(response)
+
+    expected_response = ["elektrischen", "Stuhl", "626",
+                         "seinem", "Stuhl", "592"]
+    assert_equal(expected_response, response)
   end
 
   def test_right_neighbours
-    assert_raise(ArgumentError) do
-      @api.right_neighbours
-    end
-    assert_raise(ArgumentError) do
-      @api.right_neighbours(1, 2, 3)
-    end
-    response = @api.right_neighbours(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    response = @api.right_neighbours('Stuhl', 2)
+    check_response(response)
+
+    expected_response = ["Stuhl", "räumen", "189",
+                         "Stuhl", "hin und her", "130"]
+    assert_equal(expected_response, response)
   end
 
   def test_similarity
-    assert_raise(ArgumentError) do
-      @api.similarity
-    end
-    assert_raise(ArgumentError) do
-      @api.similarity(1, 2, 3)
-    end
     response = @api.similarity(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    check_response(response)
+
   end
 
   def test_experimental_synonyms
-    assert_raise(ArgumentError) do
-      @api.experimental_synonyms
-    end
-    assert_raise(ArgumentError) do
-      @api.experimental_synonyms(1, 2, 3)
-    end
     response = @api.experimental_synonyms(@word)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    check_response(response)
+
   end
   
   # three parameters
   def test_right_collocation_finder
-    assert_raise(ArgumentError) do
-      @api.right_collocation_finder
-    end
-    assert_raise(ArgumentError) do
-      @api.right_collocation_finder(1, 2, 3, 4)
-    end
     response = @api.right_collocation_finder(@word, 'V')
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    check_response(response)
+
   end
 
   def test_left_collocation_finder
-    assert_raise(ArgumentError) do
-      @api.left_collocation_finder
-    end
-    assert_raise(ArgumentError) do
-      @api.left_collocation_finder(1, 2, 3, 4)
-    end
     response = @api.left_collocation_finder(@word, 'A')
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(!response.empty?)
+    check_response(response)
+
   end
 
   def test_cooccurrences
@@ -252,5 +220,12 @@ class TestApi < Test::Unit::TestCase
     assert_raise(NotImplementedError) do
       @api.intersection(@word, @word, 10)
     end
+  end
+
+################## HELPER METHODS ###############################################
+  def check_response(response)
+    assert_not_nil(response)
+    assert_instance_of(Array, response)
+    assert(response.any?)
   end
 end
