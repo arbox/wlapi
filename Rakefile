@@ -14,9 +14,9 @@ CLOBBER.include('ydoc',
 # Generate documentation.
 require 'rdoc/task'
 RDoc::Task.new do |rdoc|
-  rdoc.rdoc_files.include('README',
-                          'LICENSE',
-                          'CHANGELOG',
+  rdoc.rdoc_files.include('README.rdoc',
+                          'LICENSE.rdoc',
+                          'CHANGELOG.rdoc',
                           'lib/**/*'
                           )
   rdoc.rdoc_dir = 'rdoc'
@@ -66,7 +66,7 @@ end
 
 desc 'Builds the .gem package.'
 task :build do
-  puts 'Building the package'
+  puts 'Building the package.'
 end
 
 desc 'Publish the documentation on the homepage.'

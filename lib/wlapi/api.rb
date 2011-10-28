@@ -2,7 +2,7 @@
 # 2010-, Andrei Beliankou
 
 # :title: Ruby based API for Wortschatz Leipzig web services
-# :main: README
+# :main: README.rdoc
 
 require 'savon'
 

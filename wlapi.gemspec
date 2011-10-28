@@ -10,7 +10,6 @@ Gem::Specification.new do |s|
   # it is the description for 'gem list -d'
   s.summary = 'WLAPI is a programmatic API for web services provided by the project Wortschatz, University of Leipzig. Use different linguistic services such as synonym and collocation search.'
   s.description = 'WLAPI is a programmatic API for web services provided by the project Wortschatz, University of Leipzig. These services are a great source of linguistic knowledge for morphological, syntactic and semantic analysis of German both for traditional and Computational Linguistics (CL). Use this API to gain data on word frequencies, left and right neighbours, collocations and semantic similarity. Check it out if you are interested in Natural Language Processing (NLP) and Human Language Technology (HLT).'
-  s.rubyforge_project = 'wlapi'
   s.version = WLAPI::VERSION
   s.author = "Andrei Beliankou"
   s.email = "a.belenkow@uni-trier.de"
@@ -22,19 +21,14 @@ Gem::Specification.new do |s|
   s.add_development_dependency('yard')
   s.add_development_dependency('fakeweb')
   s.add_development_dependency('rake')
-  if RUBY_VERSION =~ /^1\.8/
-    s.add_development_dependency('ruby-debug')
-  elsif RUBY_VERSION =~ /^1\.9/
-    s.add_development_dependency('ruby-debug19')
-  end
-  s.extra_rdoc_files = ['README', 'LICENSE', 'CHANGELOG']
-  s.rdoc_options = ['-m', 'README']
+  s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.rdoc']
+  s.rdoc_options = ['-m', 'README.rdoc']
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>=1.8.5'
   s.files = FileList['lib/**/*.rb',
-                     'README',
-                     'LICENSE',
-                     'CHANGELOG',
+                     'README.rdoc',
+                     'LICENSE.rdoc',
+                     'CHANGELOG.rdoc',
                      '.yardopts',
                      'test/**/*'].to_a
   s.test_files = FileList['test/**/*'].to_a
