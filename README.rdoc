@@ -67,6 +67,10 @@ credentials and instantiate an authenticated client:
 See documentation in the WLAPI::API class for details
 on particular search methods.
 
+== EXCEPTION HIERARCHY
+While using WLAPI you can face following errors:
+* <tt>Savon::SOAP::Fault</tt>.
+
 == SUPPORT
 If you have question, bug reports or any suggestions, please drop me an email :) 
 Any help is deeply appreciated!
