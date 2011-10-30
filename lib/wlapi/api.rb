@@ -5,6 +5,7 @@
 # :main: README.rdoc
 
 require 'savon'
+require 'wlapi/error'
 
 # REXML is fast enough for our task.
 require 'rexml/document'
@@ -43,7 +44,7 @@ module WLAPI
         :RightNeighbours => "#{endpoint}/RightNeighbours",
         :Sentences => "#{endpoint}/Sentences",
         :Cooccurrences => "#{endpoint}/Cooccurrences"
-        # no MARSService, Kookurrenzschnitt and Kreuzwortrraetsel
+        # no MARSService and Kreuzwortrraetsel
       }
       
       # cl short for client.
@@ -343,8 +344,8 @@ module WLAPI
           warn(soap.to_xml) if $DEBUG
           
         end
-      rescue Savon::SOAP::Fault => e
-        raise
+      rescue => e
+        fail(WLAPI::ExternalError, e)
       end
       
       doc = Document.new(resp.to_xml)
