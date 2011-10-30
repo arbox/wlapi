@@ -69,7 +69,25 @@ on particular search methods.
 
 == EXCEPTION HIERARCHY
 While using WLAPI you can face following errors:
-* <tt>Savon::SOAP::Fault</tt>.
+* <tt>WLAPI::UserError</tt>;
+* <tt>WLAPI::ExternalError</tt>.
+
+The errors here are presented in the order they may occur
+during WLAPI's work.
+
+First WLAPI checks the user input and throws a <tt>WLAPI::UserError</tt>
+if the arguments are not appropriate.
+
+Then it fetches a response from a remote server, it can result
+in a <tt>WLAPI::ExternalError</tt>. In most cases it will be a simple wrapper
+around other errors, e.g. <tt>Savon::SOAP::Fault</tt>.
+
+All of them are subcalsses of <tt>YANAPI::Error</tt> which is in turn a subclass
+of the standard +RuntimeError+.
+
+If you want to intercept any and every exception thrown by YANAPI simply rescue
+<tt>YANAPI::Error</tt>.
+
 
 == SUPPORT
 If you have question, bug reports or any suggestions, please drop me an email :) 
