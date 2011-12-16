@@ -22,6 +22,28 @@ class TestApi < Test::Unit::TestCase
              :intersection,
              :frequencies
             ]
+
+  ONE_PAR = [:frequencies,
+             :baseform,
+             :domain
+            ]
+  
+  THREE_PAR = [:right_collocation_finder,
+               :left_collocation_finder,
+               :cooccurrences,
+               :cooccurrences_all,
+               :intersection
+              ]
+
+  TWO_PAR = [:wordforms,
+             :thesaurus,
+             :synonyms,
+             :sentences,
+             :left_neighbours,
+             :right_neighbours,
+             :similarity,
+             :experimental_synonyms
+            ]
   def setup
     @api = WLAPI::API.new
     @word = 'Stuhl'
@@ -30,7 +52,7 @@ class TestApi < Test::Unit::TestCase
   def teardown
   end
   
-  # test constants
+  # Test constants.
   def test_constants
     assert(WLAPI::VERSION.is_a?(String))
     assert_equal(false, WLAPI::VERSION.empty?)
@@ -47,39 +69,35 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_for_redundant_arguments
-    one_par = [:frequencies,
-               :baseform,
-               :domain
-              ]
+
     assert_raise(ArgumentError) do
-      one_par.each { |m| @api.send(m, 1, 2) }
+      ONE_PAR.each { |m| @api.send(m, 'a', 2) }
     end
 
-    two_par = [:wordforms,
-               :thesaurus,
-               :synonyms,
-               :sentences,
-               :left_neighbours,
-               :right_neighbours,
-               :similarity,
-               :experimental_synonyms
-              ]
     assert_raise(ArgumentError) do
-      two_par.each { |m| @api.send(m, 1, 2, 3) }
+      TWO_PAR.each { |m| @api.send(m, 'a', 2, 3) }
     end
     
-    three_par = [:right_collocation_finder,
-                 :left_collocation_finder,
-                 :cooccurrences,
-                 :cooccurrences_all,
-                 :intersection
-                ]
+
     assert_raise(ArgumentError) do
-      three_par.each { |m| @api.send(m, 1, 2, 3, 4) }
+      THREE_PAR.each { |m| @api.send(m, 'a', 'a', 3, 4) }
     end    
   end
 
-  # one parameter
+  def test_argument_semantics
+    assert_raise(WLAPI::UserError) do
+      ONE_PAR.each { |m| @api.send(m, 1) }
+    end
+=begin
+    assert_raise(WLAPI::UserError) do
+      TWO_PAR.each { |m| @api.send(m, 'Haus', 1) }
+    end
+=end  
+    assert_raise(WLAPI::UserError) do
+      THREE_PAR.each { |m| @api.send(m, 3, 3.5, 'a') }
+    end
+  end  
+  # One parameter.
   def test_frequencies
     response = @api.frequencies('Haus')
     check_response(response)
@@ -252,11 +270,15 @@ class TestApi < Test::Unit::TestCase
     rescue RuntimeError => e
       assert_match(/You're not allowed to access this service./, e.message)
     end
-    # Not possible to test without access credential.
+    # Not possible to test without access credentials.
   end
 
 
 ################## HELPER METHODS ###############################################
+  def check_input(*args)
+  end
+
+  
   def check_response(response)
     assert_not_nil(response)
     assert_instance_of(Array, response)
