@@ -1,4 +1,11 @@
 == COMPLETED
+=== 0.8.3
+Implemented a simple error handling strategy, it is possible to intercept
+the <tt>WLAPI::Error</tt> which covers all error types.
+
+Added error for inconvinient user argumets.
+
+Added new tests and refactored old tests.
 === 0.8.1
 Moved to dependency management via Bundler.
 === 0.8.0
@@ -15,10 +22,6 @@ Initial release of the lib.
 
 
 == PLANNED
-=== 0.8.2
-Refactore all test and implement server response stubs with +fakeweb+.
-=== 0.8.3
-Implement an error handling strategy.
 === 0.8.4
 Test the lib against mri, rbx, jruby, win rubies.
 === 0.8.5
