@@ -82,17 +82,21 @@ module WLAPI
     # in the corpus. The higher the class, the rarer the word:
     #   api.frequencies("Autos") => ["40614", "9"]
     def frequencies(word)
+      check_params(word)
+      
       arg1 = ['Wort', word]
       answer = query(@cl_Frequencies, arg1)
 
       get_answer(answer)
     end
     
-    # Gets the baseform (whatever it is :) not lemma).
+    # Gets the baseform (whatever it is :), not lemma).
     # Returns the lemmatized (base) form of the input word
     # and the POS tag in an array:
     #   api.baseform("Auto") => ["Auto", "N"]
     def baseform(word)
+      check_params(word)
+      
       arg1 = ['Wort', word]
       answer = query(@cl_Baseform, arg1)
 
@@ -105,6 +109,8 @@ module WLAPI
     # Is it a good name? all names are in English, but here..
     # let's call it domain, not sachgebiet
     def domain(word)
+      check_params(word)
+      
       arg1 = ['Wort', word]
       answer = query(@cl_Sachgebiet, arg1)
       
@@ -117,6 +123,8 @@ module WLAPI
     # Returns all other word forms of the same lemma for a given word form.
     #   api.wordforms("Auto") => ["Auto", "Autos"]
     def wordforms(word, limit = 10)
+      check_params(word, limit)
+      
       # note, it is the only service which requires 'Word', not 'Wort'
       arg1 = ['Word', word]
       arg2 = ['Limit', limit]
@@ -130,6 +138,8 @@ module WLAPI
     # and thus returns more synonyms:
     #   api.thesaurus("Auto") => ["Auto", "Bahn", "Wagen", "Zug", "Schiff", ...]
     def thesaurus(word, limit = 10)
+      check_params(word, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_Thesaurus, arg1, arg2)
@@ -141,6 +151,8 @@ module WLAPI
     # Returns synonyms of the input word. In other words, this is a thesaurus.
     #   api.synonyms("Auto") => ["Kraftwagen", "Automobil", "Benzinkutsche", ...]
     def synonyms(word, limit = 10)
+      check_params(word, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_Synonyms, arg1, arg2)
@@ -158,6 +170,8 @@ module WLAPI
     #--
     # ok, but results should be filtered
     def sentences(word, limit = 10)
+      check_params(word, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_Sentences, arg1, arg2)
@@ -171,6 +185,8 @@ module WLAPI
     #--
     # ok, but results should be filtered
     def left_neighbours(word, limit = 10)
+      check_params(word, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_LeftNeighbours, arg1, arg2)
@@ -184,6 +200,8 @@ module WLAPI
     #--
     # ok, but results should be filtered
     def right_neighbours(word, limit = 10)
+      check_params(word, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_RightNeighbours, arg1, arg2)
@@ -200,6 +218,8 @@ module WLAPI
     # may take a long time.
     #   api.similarity("Auto") => ["Auto", "Wagen", "26", ...]
     def similarity(word, limit = 10)
+      check_params(word, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_Similarity, arg1, arg2)
@@ -211,6 +231,8 @@ module WLAPI
     #--
     # don't know, if we have to include this service...
     def experimental_synonyms(word, limit = 10)
+      check_params(word, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_ExperimentalSynonyms, arg1, arg2)
@@ -230,6 +252,8 @@ module WLAPI
     #   api.right_collocation_finder("Auto", "V", 10) =>
     #   ["Auto", "abfackeln", "V", ...]
     def right_collocation_finder(word, pos, limit = 10)
+      check_params(word, pos, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Wortart', pos]
       arg3 = ['Limit', limit]
@@ -247,6 +271,8 @@ module WLAPI
     #   api.left_collocation_finder("Stuhl", "A", 10) =>
     #   ["apostolisch", "A", "Stuhl", ...]
     def left_collocation_finder(word, pos, limit = 10)
+      check_params(word, pos, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Wortart', pos]
       arg3 = ['Limit', limit]
@@ -257,6 +283,8 @@ module WLAPI
     
     # Returns statistically significant co-occurrences of the input word.
     def cooccurrences(word, sign, limit = 10)
+      check_params(word, sign, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Mindestsignifikanz', sign]
       arg3 = ['Limit', limit]
@@ -270,6 +298,8 @@ module WLAPI
     # table as in the Cooccurrences services,
     # which means significantly longer wait times.
     def cooccurrences_all(word, sign, limit = 10)
+      check_params(word, sign, limit)
+      
       arg1 = ['Wort', word]
       arg2 = ['Mindestsignifikanz', sign]
       arg3 = ['Limit', limit]
@@ -286,6 +316,8 @@ module WLAPI
     # let's call it intersection, not kookurrenzschnitt
     # is being used INTERN, we need additional credentials
     def intersection(word1, word2, limit = 10)
+      check_params(word1, word2, limit)
+      
       arg1 = ['Wort 1', word1]
       arg2 = ['Wort 2', word2]
       arg3 = ['Limit', limit]
@@ -370,5 +402,34 @@ module WLAPI
       result.any? ? result : nil
     end
 
+    def check_params(*args)
+      m = caller(1).first.match(/^.+`(.*)'$/)[1]
+      num_of_args = self.method(m.to_sym).arity
+      messages = []
+
+      # Arity can be negativ => .abs.
+      case num_of_args.abs
+      when 1
+        messages << msg(args[0], m, 'String') unless args[0].is_a?(String)
+      when 2
+        messages << msg(args[0], m, 'String') unless args[0].is_a?(String)
+        messages << msg(args[1], m, 'Numeric') unless args[1].is_a?(Fixnum)
+      when 3
+        messages << msg(args[0], m, 'String') unless args[0].is_a?(String)
+        unless args[1].is_a?(String) || args[1].is_a?(Fixnum)
+          messages << msg(args[1], m, 'String or Numeric')
+        end
+        messages << msg(args[2], m, 'Numeric') unless args[2].is_a?(Fixnum)
+      end
+
+      if messages.any?
+        fail WLAPI::UserError, messages.join("\n")
+      end
+    end
+
+    def msg(arg, meth, cls)
+      "Argument <#{arg}> for the method <#{meth}> should be a <#{cls}>, " +
+      "not <#{arg.class}>!"
+    end
   end # class
 end # module
