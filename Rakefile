@@ -71,6 +71,6 @@ end
 
 desc 'Publish the documentation on the homepage.'
 task :publish => [:clobber, :doc] do
-  system 'scp -r rdoc/* arbox@rubyforge.org:/var/www/gforge-projects/wlapi'
+  system 'scp -r ydoc/* arbox@bu.chsta.be:/var/www/sites/bu.chsta.be/htdocs/shared/projects/wlapi'
 end
 
