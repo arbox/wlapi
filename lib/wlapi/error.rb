@@ -11,6 +11,6 @@ module WLAPI
     end
   end
 
-  class UserError < Error
-  end
+  class UserError < Error; end
+
 end
