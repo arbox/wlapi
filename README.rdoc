@@ -1,8 +1,10 @@
 = WLAPI
 
 * {RubyGems}[http://rubygems.org/gems/wlapi]
-* Developers {Homepage}[http://www.uni-trier.de/index.php?id=24140]
-* {WLAPI Project Page}[http://wlapi.rubyforge.org/]
+* Developers {Homepage}[http://bu.chsta.be/]
+* {WLAPI Project Page}[http://bu.chsta.be/projects/wlapi/]
+* {Source Code}[https://github.com/arbox/wlapi]
+* {Bug Tracker}[https://github.com/arbox/wlapi/issues]
 
 == DESCRIPTION
 WLAPI is a programmatic API for web services provided by the project
