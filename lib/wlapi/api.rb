@@ -44,7 +44,9 @@ module WLAPI
         :RightNeighbours => "#{endpoint}/RightNeighbours",
         :Sentences => "#{endpoint}/Sentences",
         :Cooccurrences => "#{endpoint}/Cooccurrences",
-        :Kreuzwortraetsel => "#{endpoint}/Kreuzwortraetsel"
+        :Kreuzwortraetsel => "#{endpoint}/Kreuzwortraetsel",
+        :NGrams => "#{endpoint}/NGrams",
+        :NGramReferences => "#{endpoint}/NGramReferences"
         # no MARSService
       }
       
@@ -117,7 +119,7 @@ module WLAPI
       
       get_answer(answer)
     end
-    
+
     ## Two parameter methods.
     #############################################################################
     
@@ -239,6 +241,13 @@ module WLAPI
       answer = query(@cl_ExperimentalSynonyms, arg1, arg2)
       
       get_answer(answer)
+    end
+
+    #
+    def ngrams(pattern, limit = 10)
+    end
+    #
+    def ngram_references(pattern, limit = 10)
     end
     
     ## Three parameter methods.

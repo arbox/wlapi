@@ -5,36 +5,10 @@ require 'wlapi'
 
 class TestApi < Test::Unit::TestCase
 
-  METHODS = [:baseform,
-             :domain,
-             :wordforms,
-             :thesaurus,
-             :synonyms,
-             :sentences,
-             :left_neighbours,
-             :right_neighbours,
-             :similarity,
-             :experimental_synonyms,
-             :right_collocation_finder,
-             :left_collocation_finder,
-             :cooccurrences,
-             :cooccurrences_all,
-             :intersection,
-             :frequencies
-            ]
-
   ONE_PAR = [:frequencies,
              :baseform,
              :domain
             ]
-  
-  THREE_PAR = [:right_collocation_finder,
-               :left_collocation_finder,
-               :cooccurrences,
-               :cooccurrences_all,
-               :intersection,
-               :kreuzwortraetsel
-              ]
 
   TWO_PAR = [:wordforms,
              :thesaurus,
@@ -43,8 +17,21 @@ class TestApi < Test::Unit::TestCase
              :left_neighbours,
              :right_neighbours,
              :similarity,
-             :experimental_synonyms
+             :experimental_synonyms,
+             :ngrams,
+             :ngram_references
             ]
+
+  THREE_PAR = [:right_collocation_finder,
+               :left_collocation_finder,
+               :cooccurrences,
+               :cooccurrences_all,
+               :intersection,
+               :crossword
+              ]
+
+  METHODS = ONE_PAR + TWO_PAR + THREE_PAR
+
   def setup
     @api = WLAPI::API.new
     @word = 'Stuhl'
@@ -89,15 +76,16 @@ class TestApi < Test::Unit::TestCase
     assert_raise(WLAPI::UserError) do
       ONE_PAR.each { |m| @api.send(m, 1) }
     end
-=begin
+
     assert_raise(WLAPI::UserError) do
-      TWO_PAR.each { |m| @api.send(m, 'Haus', 1) }
+      TWO_PAR.each { |m| @api.send(m, 'Haus', [:a]) }
     end
-=end  
+
     assert_raise(WLAPI::UserError) do
       THREE_PAR.each { |m| @api.send(m, 3, 3.5, 'a') }
     end
-  end  
+  end
+  
   # One parameter.
   def test_frequencies
     response = @api.frequencies('Haus')
@@ -274,9 +262,9 @@ class TestApi < Test::Unit::TestCase
     # Not possible to test without access credentials.
   end
   
-  def test_kreuzwortraetsel
-    response = @api.kreuzwortraetsel( '%uto', 4, 200 )
-    assert_equal( 24, response.length )
+  def test_crossword
+    response = @api.crossword('%uto', 4, 200)
+    assert(response.length == 24)
   end
   
 ################## HELPER METHODS ###############################################
