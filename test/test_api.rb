@@ -32,7 +32,8 @@ class TestApi < Test::Unit::TestCase
                :left_collocation_finder,
                :cooccurrences,
                :cooccurrences_all,
-               :intersection
+               :intersection,
+               :kreuzwortraetsel
               ]
 
   TWO_PAR = [:wordforms,
@@ -272,8 +273,12 @@ class TestApi < Test::Unit::TestCase
     end
     # Not possible to test without access credentials.
   end
-
-
+  
+  def test_kreuzwortraetsel
+    response = @api.kreuzwortraetsel( '%uto', 4, 200 )
+    assert_equal( 24, response.length )
+  end
+  
 ################## HELPER METHODS ###############################################
   def check_input(*args)
   end
