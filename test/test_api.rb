@@ -258,7 +258,7 @@ class TestApi < Test::Unit::TestCase
   def test_cooccurrences_all
     begin
       @api.cooccurrences_all('Haus', 10000)
-    rescue RuntimeError => e
+    rescue WLAPI::ExternalError => e
       assert_match(/You're not allowed to access this service./, e.message)
     end
     # Not possible to test without access credential.
@@ -267,7 +267,7 @@ class TestApi < Test::Unit::TestCase
   def test_intersection
     begin
       @api.intersection('Haus', 'Brot', 1)
-    rescue RuntimeError => e
+    rescue WLAPI::ExternalError => e
       assert_match(/You're not allowed to access this service./, e.message)
     end
     # Not possible to test without access credentials.

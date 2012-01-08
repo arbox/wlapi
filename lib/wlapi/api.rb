@@ -326,8 +326,12 @@ module WLAPI
       
       get_answer(answer)
     end    
-    
-    def kreuzwortraetsel( word, word_length, limit = 10 )
+
+    #
+    #--
+    # Let's keep all public method names in English:
+    # kreuzwortraetsel => crossword.
+    def crossword(word, word_length, limit = 10)
       check_params(word, word_length, limit)
 
       arg1 = ['Wort', word ]
