@@ -43,8 +43,9 @@ module WLAPI
         :LeftNeighbours => "#{endpoint}/LeftNeighbours",
         :RightNeighbours => "#{endpoint}/RightNeighbours",
         :Sentences => "#{endpoint}/Sentences",
-        :Cooccurrences => "#{endpoint}/Cooccurrences"
-        # no MARSService and Kreuzwortrraetsel
+        :Cooccurrences => "#{endpoint}/Cooccurrences",
+        :Kreuzwortraetsel => "#{endpoint}/Kreuzwortraetsel"
+        # no MARSService
       }
       
       # cl short for client.
@@ -325,6 +326,18 @@ module WLAPI
       
       get_answer(answer)
     end    
+    
+    def kreuzwortraetsel( word, word_length, limit = 10 )
+      check_params(word, word_length, limit)
+
+      arg1 = ['Wort', word ]
+      arg2 = ['Wortlaenge', word_length]
+      arg3 = ['Limit', limit]
+      answer = query(@cl_Kreuzwortraetsel, arg1, arg2, arg3)
+      
+      get_answer(answer)
+    end
+    
     private
     
     # Main query method, it invokes the soap engine.
