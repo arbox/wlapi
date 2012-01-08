@@ -327,6 +327,15 @@ module WLAPI
       get_answer(answer)
     end    
 
+    # Attempts to find suitable words given a pattern as word parameter, 
+    # a word length and the number of words to find at max (limit)
+    #
+    # E.g. kreuzwortraetsel( "%uto", 4, ) would find 24 results
+    #
+    # SQL-LIKE syntax is used for pattern (% for an arbitrary string, 
+    # _ for a single character)
+    #
+    # Note: Umlaute will count as one character
     #
     #--
     # Let's keep all public method names in English:

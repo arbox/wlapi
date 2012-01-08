@@ -5,6 +5,7 @@
 * {WLAPI Project Page}[http://bu.chsta.be/projects/wlapi/]
 * {Source Code}[https://github.com/arbox/wlapi]
 * {Bug Tracker}[https://github.com/arbox/wlapi/issues]
+* {Mailing List}[http://groups.google.com/group/wlapi]
 
 == DESCRIPTION
 WLAPI is a programmatic API for web services provided by the project
@@ -21,6 +22,7 @@ You can use the following search methods:
 * baseform;
 * cooccurrences;
 * cooccurrences_all;
+* crossword;
 * domain;
 * experimental_synonyms;
 * frequencies;
