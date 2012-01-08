@@ -337,12 +337,12 @@ module WLAPI
     end    
 
     # Attempts to find suitable words given a pattern as word parameter, 
-    # a word length and the number of words to find at max (limit)
-    #
-    # E.g. kreuzwortraetsel( "%uto", 4, ) would find 24 results
-    #
-    # SQL-LIKE syntax is used for pattern (% for an arbitrary string, 
-    # _ for a single character)
+    # a word length and the number of words to find at max (limit),
+    # e.g. <tt>API#crossword('%uto', 4)</tt> would return find 24 results and
+    # return them as an array: <tt>[Auto, Auto, ...]</tt>:
+    #   api.crossword('%uto') => ["Auto", "Auto", ...]
+    # SQL like syntax is used for pattern (<tt>%</tt> for an arbitrary string, 
+    # <tt>_</tt> for a single character).
     #
     # Note: Umlaute will count as one character
     #

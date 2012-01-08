@@ -36,7 +36,12 @@ You can use the following search methods:
 * thesaurus;
 * wordforms.
 
-There are three additional services by Wortschatz Leipzig: Kreuzworträtsel, MARS and Kookurrenzschnitt. They will not be implemented.
+The services <tt>NGrams</tt> and <tt>NGramReferences</tt> are under
+development and will be available soon.
+
+There are two additional services by Wortschatz Leipzig: MARS and
+Kookurrenzschnitt. They will not be implemented due to internal restrictions
+of the service provider.
 
 == INSTALLATION
 WLAPI is provided as a .gem package. Simply install it via

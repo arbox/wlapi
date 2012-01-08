@@ -1,4 +1,6 @@
 == COMPLETED
+=== 0.8.4
+Imlemented the <tt>API#crossword</tt> method for the prefix/suffix search.
 === 0.8.3
 Implemented a simple error handling strategy, it is possible to intercept
 the <tt>WLAPI::Error</tt> which covers all error types.
@@ -22,11 +24,15 @@ Initial release of the lib.
 
 
 == PLANNED
-=== 0.8.4
-Test the lib against mri, rbx, jruby, win rubies.
+
+
 === 0.8.5
+Test the lib against mri, rbx, jruby, win rubies.
 Introduce +nokogiri+ for parsing responses.
 === 0.8.6
+Implement <ngrams> and <ngram_references>.
+
+Refine semantic checks for two parameter methods.
 === 0.8.7
 === 0.8.8
 === 0.8.9
