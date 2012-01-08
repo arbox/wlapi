@@ -24,6 +24,7 @@ You can use the following search methods:
 * domain;
 * experimental_synonyms;
 * frequencies;
+* kreuzwortraetsel;
 * left_collocation_finder;
 * left_neighbours;
 * right_collocation_finder;
