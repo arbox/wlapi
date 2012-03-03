@@ -4,4 +4,5 @@ gemspec
 
 group :development do
   gem 'flay'
+  gem 'travis-lint'
 end
