@@ -74,3 +74,4 @@ task :publish => [:clobber, :doc] do
   system 'scp -r ydoc/* arbox@bu.chsta.be:/var/www/sites/bu.chsta.be/htdocs/shared/projects/wlapi'
 end
 
+task :default => [:test]
