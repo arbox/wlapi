@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.author = "Andrei Beliankou"
   s.email = "a.belenkow@uni-trier.de"
   s.homepage = "http://www.uni-trier.de/index.php?id=34451"
-  s.add_runtime_dependency('savon', '>=0.8.0')
+  s.add_runtime_dependency('savon', ['>= 0.8.0', '< 2.0'])
   s.add_development_dependency('rdoc', '>=3.9.1')
   s.add_development_dependency('bundler')
   s.add_development_dependency('yard')
