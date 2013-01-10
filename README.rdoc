@@ -7,6 +7,10 @@
 * {Bug Tracker}[https://github.com/arbox/wlapi/issues]
 * {Mailing List}[http://groups.google.com/group/wlapi]
 
+== BUILD STATUS
+
+{<img src="https://travis-ci.org/arbox/wlapi.png" alt="Build Status" />}[https://travis-ci.org/arbox/wlapi]
+
 == DESCRIPTION
 WLAPI is a programmatic API for web services provided by the project
 {Wortschatz}[http://wortschatz.uni-leipzig.de/],
