@@ -7,6 +7,9 @@
 * {Bug Tracker}[https://github.com/arbox/wlapi/issues]
 * {Mailing List}[http://groups.google.com/group/wlapi]
 
+== We have a package!
+{<img src="https://badge.fury.io/rb/wlapi.png" alt="Gem Version" />}[http://badge.fury.io/rb/wlapi]
+
 == BUILD STATUS
 
 {<img src="https://travis-ci.org/arbox/wlapi.png" alt="Build Status" />}[https://travis-ci.org/arbox/wlapi]
