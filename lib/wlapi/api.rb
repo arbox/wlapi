@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 2010-, Andrei Beliankou
+# 2010-2013, Andrei Beliankou
 
 # :title: Ruby based API for Wortschatz Leipzig web services
 # :main: README.rdoc
