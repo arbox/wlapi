@@ -85,7 +85,7 @@ class TestApi < Test::Unit::TestCase
       THREE_PAR.each { |m| @api.send(m, 3, 3.5, 'a') }
     end
   end
-=begin  
+ 
   # One parameter.
   def test_frequencies
     response = @api.frequencies('Haus')
@@ -266,7 +266,7 @@ class TestApi < Test::Unit::TestCase
     response = @api.crossword('%uto', 4, 200)
     assert(response.length == 24)
   end
-=end  
+ 
 ################## HELPER METHODS ###############################################
   def check_input(*args)
   end
