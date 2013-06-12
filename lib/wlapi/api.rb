@@ -57,15 +57,21 @@ module WLAPI
       # If only one service is used in the separate session => rewrite the class!
       @services.each do |key, val|
         cl_name = '@cl_' + key.to_s
-        eval("#{cl_name} = Savon::Client.new { |wsdl| wsdl.endpoint = val}")
-        eval("#{cl_name}.wsdl.namespace = val")
-        eval("#{cl_name}.http.auth.basic(login, pass)")
+
+        options = {:wsdl => val + "?wsdl",
+          :namespaces => {'xmlns:dat' => 'http://datatypes.webservice.wortschatz.uni_leipzig.de',
+            'xmlns:urn' => val},
+          :basic_auth => ['anonymous', 'anonymous'],
+          :log => $DEBUG
+        }
+        client = Savon.client(options)
+        eval("#{cl_name} = client")
       end
       
       # Savon creates very verbose logs, switching off.
-      Savon.configure do |config|
-        config.log = false unless $DEBUG
-      end
+#      Savon.configure do |config|
+#        config.log = false unless $DEBUG
+#      end
       HTTPI.log = false unless $DEBUG
     end
     
@@ -368,49 +374,39 @@ module WLAPI
     # with keys and values for the soap query.
     def query(cl, *args)
       # WSDL is disabled since calling the server for wsdl can last too long.
-
-      begin
-        resp = cl.request(:urn, :execute) do |soap|
           
-          # Every service has a different namespace.
-          soap.namespaces['xmlns:urn'] = cl.wsdl.namespace
-          
-          soap.namespaces['xmlns:dat'] =
-            "http://datatypes.webservice.wortschatz.uni_leipzig.de"
-          
-          v = []
-          body = {
-            'urn:objRequestParameters' => {
-              'urn:corpus' => 'de',
-              'urn:parameters' => {
-                'urn:dataVectors' => v
-              }
-            }
+             
+      v = []
+      body = {
+        'urn:objRequestParameters' => {
+          'urn:corpus' => 'de',
+          'urn:parameters' => {
+            'urn:dataVectors' => v
           }
-          
-          # Setting the first argument (usually 'Wort').
-          v << {'dat:dataRow'=>[
-                                args[0][0],
-                                args[0][1]
-                               ]
-          } if args[0]
-          # Setting the second argument (usually 'Limit').
-          v << {'dat:dataRow'=>[
-                                args[1][0],
-                                args[1][1]
-                               ]
-          } if args[1]
-          # Setting the third argument (no common value)
-          v << {'dat:dataRow'=>[
-                                args[2][0],
+        }
+      }
+      
+      # Setting the first argument (usually 'Wort').
+      v << {'dat:dataRow'=>[
+                            args[0][0],
+                            args[0][1]
+                           ]
+      } if args[0]
+      # Setting the second argument (usually 'Limit').
+      v << {'dat:dataRow'=>[
+                            args[1][0],
+                            args[1][1]
+                           ]
+      } if args[1]
+      # Setting the third argument (no common value)
+      v << {'dat:dataRow'=>[
+                            args[2][0],
                                 args[2][1]
-                               ]
-          } if args[2]
-          
-          soap.body = body
-          warn(soap.to_xml) if $DEBUG
-          
-        end
+                           ]
+      } if args[2]
+      
+      begin
+        resp = cl.call(:execute, {:message => body})
       rescue => e
         fail(WLAPI::ExternalError, e)
       end
