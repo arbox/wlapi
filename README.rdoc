@@ -1,7 +1,6 @@
 = WLAPI
 
 * {RubyGems}[http://rubygems.org/gems/wlapi]
-* Developers {Homepage}[http://bu.chsta.be/]
 * {WLAPI Project Page}[http://bu.chsta.be/projects/wlapi/]
 * {Source Code}[https://github.com/arbox/wlapi]
 * {Bug Tracker}[https://github.com/arbox/wlapi/issues]
@@ -60,8 +59,7 @@ You might want to install versions prior to +0.8.0+, if you are bound on
 the old implementations of {savon}[http://savonrb.com/]:
   $ gem install wlapi -v 0.7.4
 
-If you want to do a system wide installation, do this as root
-(possibly using +sudo+).
+If you want to do a system wide installation, do this as root (possibly using +sudo+).
 
 Alternatively use your Gemfile for dependency management.
 
@@ -119,7 +117,6 @@ you might face some not implemented features.
 Please contact me with your suggestions, bug reports and feature requests.
 == LICENSE
 
-WLAPI is a copyrighted software by Andrei Beliankou, 2010, 2011
+WLAPI is a copyrighted software by Andrei Beliankou, 2010-2013
 
-You may use, redistribute and change it under the terms
-provided in the LICENSE file.
+You may use, redistribute and change it under the terms provided in the LICENSE file.
