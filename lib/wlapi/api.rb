@@ -20,13 +20,28 @@ module WLAPI
   # See the project 'Wortschatz Leipzig' for more details.
   class API
     
+    # SOAP Services Endpoint.
+    ENDPOINT = 'http://wortschatz.uni-leipzig.de/axis/services'
+
+    # The list of accessible services, the MARSService is excluded due
+    # to its internal authorization.
+    SERVICES = [:Thesaurus, :Baseform, :Similarity, :Synonyms, :Sachgebiet, :Frequencies,
+                :Kookurrenzschnitt, :ExperimentalSynonyms, :RightCollocationFinder,
+                :LeftCollocationFinder, :Wordforms, :CooccurrencesAll, :LeftNeighbours,
+                :RightNeighbours, :Sentences, :Cooccurrences, :Kreuzwortraetsel,
+                :NGrams, :NGramReferences]
+
     # At the creation point clients for all services are being instantiated.
     # You can also set the login and the password (it defaults to 'anonymous').
     #   api = WLAPI::API.new
     def initialize(login = 'anonymous', pass = 'anonymous')
 
       # This hash contains the URLs to the single services.
-      endpoint = 'http://wortschatz.uni-leipzig.de/axis/services'
+      @services = {}
+
+      SERVICES.each { |service| @services[service] = "#{ENDPOINT}/#{service}"}
+
+=begin
       @services = {
         :Thesaurus => "#{endpoint}/Thesaurus",
         :Baseform => "#{endpoint}/Baseform",
@@ -49,7 +64,7 @@ module WLAPI
         :NGramReferences => "#{endpoint}/NGramReferences"
         # no MARSService
       }
-      
+=end      
       # cl short for client.
       # Dynamically create all the clients and set access credentials.
       # It can be a very bad idea to instantiate all the clients at once,
