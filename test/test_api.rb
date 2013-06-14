@@ -88,165 +88,122 @@ class TestApi < Test::Unit::TestCase
  
   # One parameter.
   def test_frequencies
-    response = @api.frequencies('Haus')
-    check_response(response)
+    expectation = ['122072', '7']
+
+    response = execute(expectation, :frequencies, 'Haus')
 
     assert_equal(2, response.size)
     assert_match(/\d+/, response[0])
     assert_match(/\d+/, response[1])
-    assert_equal(["122072", "7"], response)
   end
 
   def test_baseform
-    response = @api.baseform('Autos')
-    check_response(response)
+    expectation = ['Auto', 'N']
+    
+    response = execute(expectation, :baseform, 'Autos')
 
     assert_equal(2, response.size)
     assert_match(/\w+/, response[0])
     assert_match(/[AVN]/, response[1])
-    assert_equal(["Auto", "N"], response)
   end
 
   def test_domain
-    response = @api.domain('Buch')
-    check_response(response)
-
-    expected_response = ["Sprachwissenschaft",
-                         "Nachname",
-                         "Stadt",
-                         "Buchkunde/Buchhandel",
-                         "Motive",
-                         "Literarische/Motive/Stoffe/Gestalten",
-                         "Buchkunde/Buchhandel",
-                         "Papierherstellung/Graphische/Technik",
-                         "Buchkunde/Buchhandel",
-                         "Bücher",
-                         "Ort in D"
-                        ]
-    assert_equal(expected_response, response)
-    # We cannot predict the minimal structure of the response.
+    expectation = ["Sprachwissenschaft",
+                   "Nachname",
+                   "Stadt",
+                   "Buchkunde/Buchhandel",
+                   "Motive",
+                   "Literarische/Motive/Stoffe/Gestalten",
+                   "Buchkunde/Buchhandel",
+                   "Papierherstellung/Graphische/Technik",
+                   "Buchkunde/Buchhandel",
+                   "Bücher",
+                   "Ort in D"]
+    execute(expectation, :domain, 'Buch')
   end
   
   # two parameters
   def test_wordforms
-    response = @api.wordforms('Buch')
-    check_response(response)
-
-    expected_response = ["Buch",
-                         "Bücher",
-                         "Büchern",
-                         "Buches",
-                         "Buchs",
-                         "Bucher"
-                        ]
-    assert_equal(expected_response, response)
+    expectation = ["Buch",
+                   "Bücher",
+                   "Büchern",
+                   "Buches",
+                   "Buchs",
+                   "Bucher"]
+    execute(expectation, :wordforms, 'Buch')
   end
 
   def test_thesaurus
-    response = @api.thesaurus('Buch')
-    check_response(response)
-
-    expected_response = ["Buch", "Titel", "Werk", "Zeitung", "Band",
-                         "Literatur", "Zeitschrift", "Bruch", "Lektüre",
-                         "Schrift"]
-    assert_equal(expected_response, response)
+    expectation = ["Buch", "Titel", "Werk", "Zeitung", "Band",
+                   "Literatur", "Zeitschrift", "Bruch", "Lektüre",
+                   "Schrift"]
+    execute(expectation, :thesaurus, 'Buch')
   end
 
   def test_synonyms
-    response = @api.synonyms('Brot')
-    check_response(response)
-
-    expected_response = ["Laib", "Brotlaib", "Laib", "Schnitte", "Stulle"]
-    assert_equal(expected_response, response)
+    expectation = ["Laib", "Brotlaib", "Laib", "Schnitte", "Stulle"]
+    execute(expectation, :synonyms, 'Brot')
   end
 
   def test_sentences
-    response = @api.sentences('Klasse', 1)
-    check_response(response)
-    expected_response = ["40829928",
-                         "Bei den Grünen war ich wohl im Urteil der politisch korrekten Klasse bei den Richtigen, auch wenn ich in ihren Augen das Falsche sagte."] 
-    assert_equal(expected_response, response)
+    expectation = ["40829928", "Bei den Grünen war ich wohl im Urteil der politisch korrekten Klasse bei den Richtigen, auch wenn ich in ihren Augen das Falsche sagte."] 
+    execute(expectation, :sentences, 'Klasse', 1)
   end
 
   def test_left_neighbours
-    response = @api.left_neighbours('Stuhl', 2)
-    check_response(response)
-
-    expected_response = ["elektrischen", "Stuhl", "626",
-                         "seinem", "Stuhl", "592"]
-    assert_equal(expected_response, response)
+    expectation = ["elektrischen", "Stuhl", "626", "seinem", "Stuhl", "592"]
+    execute(expectation, :left_neighbours, 'Stuhl', 2)
   end
 
   def test_right_neighbours
-    response = @api.right_neighbours('Stuhl', 2)
-    check_response(response)
-
-    expected_response = ["Stuhl", "räumen", "189",
-                         "Stuhl", "hin und her", "130"]
-    assert_equal(expected_response, response)
+    expectation = ["Stuhl", "räumen", "189", "Stuhl", "hin und her", "130"]
+    execute(expectation, :right_neighbours, 'Stuhl', 2)
   end
 
   def test_similarity
-    response = @api.similarity('Stuhl', 3)
-    check_response(response)
-
-    expected_response = ["Stuhl", "Sessel", "26",
-                         "Stuhl", "Lehnstuhl", "24",
-                         "Stuhl", "Sofa", "21"] 
-    assert_equal(expected_response, response)   
+    expectation = ["Stuhl", "Sessel", "26",
+                   "Stuhl", "Lehnstuhl", "24",
+                   "Stuhl", "Sofa", "21"] 
+    execute(expectation, :similarity, 'Stuhl', 3)
   end
 
   def test_experimental_synonyms
-    response = @api.experimental_synonyms('Stuhl')
-    check_response(response)
-
-    expected_response = ["Einrichtungsgegenstand", "v",
-                         "Bett", "v",
-                         "Lampe", "v",
-                         "Tisch", "v",
-                         "Schrank", "v",
-                         "Teppich", "v",
-                         "Gebrauchsmöbel", "v",
-                         "Möbelstück", "v",
-                         "Bank", "v",
-                         "Bord", "v"
-                        ]
-    assert_equal(expected_response, response)
+    expectation = ["Einrichtungsgegenstand", "v",
+                   "Bett", "v",
+                   "Lampe", "v",
+                   "Tisch", "v",
+                   "Schrank", "v",
+                   "Teppich", "v",
+                   "Gebrauchsmöbel", "v",
+                   "Möbelstück", "v",
+                   "Bank", "v",
+                   "Bord", "v"]
+    execute(expectation, :experimental_synonyms, 'Stuhl')
   end
   
   # three parameters
   def test_right_collocation_finder
-    response = @api.right_collocation_finder('Stuhl', 'V', 3)
-    check_response(response)
-
-    expected_response = ["Stuhl", "aufmöbeln", "V",
-                         "Stuhl", "aufreihen", "V",
-                         "Stuhl", "aufspringen", "V"
-                        ]
-    assert_equal(expected_response, response) 
+    expectation = ["Stuhl", "aufmöbeln", "V",
+                   "Stuhl", "aufreihen", "V",
+                   "Stuhl", "aufspringen", "V"]
+    execute(expectation, :right_collocation_finder, 'Stuhl', 'V', 3)
   end
 
   def test_left_collocation_finder
-    response = @api.left_collocation_finder('Stuhl', 'A', 3)
-    check_response(response)
-    expected_response = ["Hl", "A", "Stuhl",
-                         "abwaschbar", "A", "Stuhl",
-                         "alle", "A", "Stuhl"
-                        ]
-    assert_equal(expected_response, response) 
+    expectation = ["Hl", "A", "Stuhl",
+                   "abwaschbar", "A", "Stuhl",
+                   "alle", "A", "Stuhl"]
+    execute(expectation, :left_collocation_finder, 'Stuhl', 'A', 3)
   end
 
   def test_cooccurrences
-    response = @api.cooccurrences('Haus', 10000)
-    check_response(response)
-    expected_response = ["Haus", "das", "11747"]
-    
-    assert_equal(expected_response, response) 
+    expectation = ["Haus", "das", "11747"]
+    execute(expectation, :cooccurrences, 'Haus', 10000)    
   end
 
   def test_cooccurrences_all
     begin
-      @api.cooccurrences_all('Haus', 10000)
+      execute(['Expected'], :cooccurrences_all, 'Haus', 10000)
     rescue WLAPI::ExternalError => e
       assert_match(/You're not allowed to access this service./, e.message)
     end
@@ -255,7 +212,7 @@ class TestApi < Test::Unit::TestCase
 
   def test_intersection
     begin
-      @api.intersection('Haus', 'Brot', 1)
+      execute(['Expected'], :intersection, 'Haus', 'Brot', 1)
     rescue WLAPI::ExternalError => e
       assert_match(/You're not allowed to access this service./, e.message)
     end
@@ -263,11 +220,29 @@ class TestApi < Test::Unit::TestCase
   end
   
   def test_crossword
-    response = @api.crossword('%uto', 4, 200)
+    expectation = ['word'] * 24
+    response = execute(expectation, :crossword, '%uto', 4, 200)
     assert(response.length == 24)
   end
  
 ################## HELPER METHODS ###############################################
+  def execute(expectation, method, *args)
+    begin
+      result = @api.send(method, *args)
+    rescue => error
+      if error.message =~ /(Server shutdown in progress)|(404)/i
+        result = expectation
+      else
+        raise        
+      end
+    end
+
+    check_response(result)
+    assert_equal(expectation, result)
+
+    result
+  end
+
   def check_input(*args)
   end
 
