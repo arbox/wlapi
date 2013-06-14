@@ -1,6 +1,9 @@
 lib_path = File.expand_path(File.dirname(__FILE__) + '/lib')
 $LOAD_PATH.unshift(lib_path) unless $LOAD_PATH.include?(lib_path)
 
+require 'wlapi/version'
+require 'date'
+
 # Rake provides FileUtils and its own FileUtils extensions
 require 'rake'
 require 'rake/clean'
@@ -72,6 +75,15 @@ end
 desc 'Publish the documentation on the homepage.'
 task :publish => [:clobber, :doc] do
   system 'scp -r ydoc/* arbox@bu.chsta.be:/var/www/sites/bu.chsta.be/htdocs/shared/projects/wlapi'
+end
+
+task :travis do
+  message = "#{Date.today} #{WLAPI::VERSION}"
+  File.open('.gem-version', 'w') do |file|
+    file.write(message)
+  end
+  sh "git commit -a -m '#{message}'"
+  sh 'git push origin master'
 end
 
 task :default => [:test]
