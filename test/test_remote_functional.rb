@@ -1,91 +1,18 @@
 # -*- coding: utf-8 -*-
 require 'test/unit'
+require 'test_helper.rb'
 require 'wlapi'
 
-
 class TestApi < Test::Unit::TestCase
-
-  ONE_PAR = [:frequencies,
-             :baseform,
-             :domain
-            ]
-
-  TWO_PAR = [:wordforms,
-             :thesaurus,
-             :synonyms,
-             :sentences,
-             :left_neighbours,
-             :right_neighbours,
-             :similarity,
-             :experimental_synonyms,
-             :ngrams,
-             :ngram_references
-            ]
-
-  THREE_PAR = [:right_collocation_finder,
-               :left_collocation_finder,
-               :cooccurrences,
-               :cooccurrences_all,
-               :intersection,
-               :crossword
-              ]
-
-  METHODS = ONE_PAR + TWO_PAR + THREE_PAR
-
+  include TestHelper
+  
   def setup
     @api = WLAPI::API.new
-    @word = 'Stuhl'
   end
 
   def teardown
-  end
-  
-  # Test constants.
-  def test_constants
-    assert(WLAPI::VERSION.is_a?(String))
-    assert_equal(false, WLAPI::VERSION.empty?)
-  end
+  end 
 
-  def test_availability_of_pulic_methods
-    METHODS.each { |m| assert_respond_to(@api, m) }
-  end
-
-  def test_for_absent_arguments
-    assert_raise(ArgumentError) do
-      METHODS.each { |m| @api.send(m) }
-    end
-  end
-
-  def test_for_redundant_arguments
-
-    assert_raise(ArgumentError) do
-      ONE_PAR.each { |m| @api.send(m, 'a', 2) }
-    end
-
-    assert_raise(ArgumentError) do
-      TWO_PAR.each { |m| @api.send(m, 'a', 2, 3) }
-    end
-    
-
-    assert_raise(ArgumentError) do
-      THREE_PAR.each { |m| @api.send(m, 'a', 'a', 3, 4) }
-    end    
-  end
-
-  def test_argument_semantics
-    assert_raise(WLAPI::UserError) do
-      ONE_PAR.each { |m| @api.send(m, 1) }
-    end
-
-    assert_raise(WLAPI::UserError) do
-      TWO_PAR.each { |m| @api.send(m, 'Haus', [:a]) }
-    end
-
-    assert_raise(WLAPI::UserError) do
-      THREE_PAR.each { |m| @api.send(m, 3, 3.5, 'a') }
-    end
-  end
- 
   # One parameter.
   def test_frequencies
     expectation = ['122072', '7']
@@ -223,33 +150,5 @@ class TestApi < Test::Unit::TestCase
     expectation = ['word'] * 24
     response = execute(expectation, :crossword, '%uto', 4, 200)
     assert(response.length == 24)
-  end
- 
-################## HELPER METHODS ###############################################
-  def execute(expectation, method, *args)
-    begin
-      result = @api.send(method, *args)
-    rescue => error
-      if error.message =~ /(Server shutdown in progress)|(404)/i
-        result = expectation
-      else
-        raise        
-      end
-    end
-
-    check_response(result)
-    assert_equal(expectation, result)
-
-    result
-  end
-
-  def check_input(*args)
-  end
-
-  
-  def check_response(response)
-    assert_not_nil(response)
-    assert_instance_of(Array, response)
-    assert(response.any?)
   end
 end
