@@ -36,7 +36,7 @@ You can use the following search methods:
 
 The services <tt>NGrams</tt> and <tt>NGramReferences</tt> are under development and will be available soon. Both methods throw an <tt>NotImplementedError</tt> for now.
 
-The interface will be slightly change in the version <tt>1.0</tt> to be more readable. For example, <tt>#cooccurrences_all</tt> will become <tt>#all_cooccurrences</tt>.
+The interface will be slightly changed in the version <tt>1.0</tt> to be more readable. For example, <tt>#cooccurrences_all</tt> will become <tt>#all_cooccurrences</tt>.
 
 There are two additional services by Wortschatz Leipzig: MARS and Kookurrenzschnitt. They will not be implemented due to internal restrictions of the service provider.
 
