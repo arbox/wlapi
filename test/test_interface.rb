@@ -83,4 +83,13 @@ class TestInterface < Test::Unit::TestCase
     end
   end
 
+  def test_missing_methods
+    assert_raise(NotImplementedError) do
+      @api.ngrams('Haus')
+    end
+
+    assert_raise(NotImplementedError) do
+      @api.ngram_references('Haus')
+    end
+  end
 end

@@ -266,9 +266,11 @@ module WLAPI
 
     #
     def ngrams(pattern, limit = 10)
+      raise(NotImplementedError, 'This method will be implemented in the next release.')
     end
     #
     def ngram_references(pattern, limit = 10)
+      raise(NotImplementedError, 'This method will be implemented in the next release.')
     end
     
     ## Three parameter methods.

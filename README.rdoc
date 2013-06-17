@@ -9,54 +9,49 @@
 {<img src="https://codeclimate.com/github/arbox/wlapi.png" alt="Code Climate" />}[https://codeclimate.com/github/arbox/wlapi]
 
 == DESCRIPTION
-WLAPI is a programmatic API for web services provided by the project
-{Wortschatz}[http://wortschatz.uni-leipzig.de/],
-University of Leipzig. These services are a great source of linguistic knowledge
-for morphological, syntactic and semantic analysis of German both for traditional
-and Computational Linguistics (CL).
+WLAPI is a programmatic API for web services provided by the project {Wortschatz}[http://wortschatz.uni-leipzig.de/], University of Leipzig. These services are a great source of linguistic knowledge for morphological, syntactic and semantic analysis of German both for traditional and Computational Linguistics (CL).
 
-Use this API to gain data on word frequencies, left and right neighbours,
-collocations and semantic similarity. Check it out if you are interested
-in Natural Language Processing (NLP) and Human Language Technology (HLT).
+Use this API to gain data on word frequencies, left and right neighbours, collocations and semantic similarity. Check it out if you are interested in Natural Language Processing (NLP) and Human Language Technology (HLT).
+
 === Implemented Features
 You can use the following search methods:
-* baseform;
-* cooccurrences;
-* cooccurrences_all;
-* crossword;
-* domain;
-* experimental_synonyms;
-* frequencies;
-* left_collocation_finder;
-* left_neighbours;
-* right_collocation_finder;
-* right_neighbours;
-* sentences;
-* similarity;
-* synonyms;
-* thesaurus;
-* wordforms.
+* <tt>#baseform</tt>;
+* <tt>#cooccurrences</tt>;
+* <tt>#cooccurrences_all</tt>;
+* <tt>#crossword</tt>;
+* <tt>#domain</tt>;
+* <tt>#experimental_synonyms</tt>;
+* <tt>#frequencies</tt>;
+* <tt>#left_collocation_finder</tt>;
+* <tt>#left_neighbours</tt>;
+* <tt>#right_collocation_finder</tt>;
+* <tt>#right_neighbours</tt>;
+* <tt>#sentences</tt>;
+* <tt>#similarity</tt>;
+* <tt>#synonyms</tt>;
+* <tt>#thesaurus</tt>;
+* <tt>#wordforms</tt>;
+* <tt>#ngrams</tt>;
+* <tt>#ngram_references</tt>;
 
-The services <tt>NGrams</tt> and <tt>NGramReferences</tt> are under
-development and will be available soon.
+The services <tt>NGrams</tt> and <tt>NGramReferences</tt> are under development and will be available soon. Both methods throw an <tt>NotImplementedError</tt> for now.
 
-There are two additional services by Wortschatz Leipzig: MARS and
-Kookurrenzschnitt. They will not be implemented due to internal restrictions
-of the service provider.
+The interface will be slightly change in the version <tt>1.0</tt> to be more readable. For example, <tt>#cooccurrences_all</tt> will become <tt>#all_cooccurrences</tt>.
+
+There are two additional services by Wortschatz Leipzig: MARS and Kookurrenzschnitt. They will not be implemented due to internal restrictions of the service provider.
 
 == INSTALLATION
-WLAPI is provided as a .gem package. Simply install it via
-{RubyGems}[http://rubygems.org/gems/wlapi].
+WLAPI is provided as a .gem package. Simply install it via {RubyGems}[http://rubygems.org/gems/wlapi].
+
 To install WLAPI ussue the following command:
   $ gem install wlapi
 
-You might want to install versions prior to +0.8.0+, if you are bound on
-the old implementations of {savon}[http://savonrb.com/]:
+You might want to install versions prior to +0.8.0+, if you are bound on the old implementations of {savon}[http://savonrb.com/]:
   $ gem install wlapi -v 0.7.4
 
 If you want to do a system wide installation, do this as root (possibly using +sudo+).
 
-Alternatively use your Gemfile for dependency management.
+Alternatively use your <tt>Gemfile</tt> for dependency management.
 
 
 == SYNOPSIS
