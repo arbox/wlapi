@@ -87,4 +87,8 @@ task :travis do
   sh 'git push origin master'
 end
 
+task :hello do
+
+end
+
 task :default => [:test]
