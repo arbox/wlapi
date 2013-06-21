@@ -97,6 +97,8 @@ If you want to intercept any and every exception thrown by WLAPI simply rescue
 If you have question, bug reports or any suggestions, please drop me an email :) 
 Any help is deeply appreciated!
 
+If you need some new functionality please contact me or provide a pull request. You code should be complete and tested. Please use <tt>local_*</tt> and <tt>remote_*</tt> naming convention for your tests.
+
 == CHANGELOG
 For details on future plan and working progress see CHANGELOG.
 
