@@ -33,14 +33,26 @@ end
 
 
 # Testing.
-require 'rake/testtask'
-Rake::TestTask.new do |t|
-  t.libs << 'test'
-  t.warning
-  t.ruby_opts = ['-rubygems']
-  t.test_files = FileList['test/*.rb']
-end
+#require 'rake/testtask'
+#Rake::TestTask.new do |t|
+#  t.libs << 'test'
+#  t.warning
+#  t.ruby_opts = ['-rubygems']
+#  t.test_files = FileList['test/*.rb']
+#end
 
+namespace :test do
+  interpreter = 'ruby -rubygems -I lib -I test'
+  task :local do
+    sh "#{interpreter} test/local_*"
+  end
+
+  task :remote do
+    sh "#{interpreter} test/remote_*"
+  end
+  
+  task :all => [:local, :remote]
+end
 
 
 desc 'Open an irb session preloaded with this library.'
