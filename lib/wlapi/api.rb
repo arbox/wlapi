@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 # 2010-2013, Andrei Beliankou
 
 # :title: Ruby based API for Wortschatz Leipzig web services

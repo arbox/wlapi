@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.description = 'WLAPI is a programmatic API for web services provided by the project Wortschatz, University of Leipzig. These services are a great source of linguistic knowledge for morphological, syntactic and semantic analysis of German both for traditional and Computational Linguistics (CL). Use this API to gain data on word frequencies, left and right neighbours, collocations and semantic similarity. Check it out if you are interested in Natural Language Processing (NLP) and Human Language Technology (HLT).'
   s.version = WLAPI::VERSION
   s.author = "Andrei Beliankou"
-  s.email = "arbox@yandex.ru"
-  s.homepage = "http://www.uni-trier.de/index.php?id=34451"
+  s.email = "arbox@bu.chsta.be"
+  s.homepage = 'http://bu.chsta.be/projects/wlapi/'
   s.add_runtime_dependency('savon', '~> 2.1')
   s.add_development_dependency('rdoc', '>=3.9.1')
   s.add_development_dependency('bundler')

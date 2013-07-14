@@ -46,13 +46,14 @@ WLAPI is provided as a .gem package. Simply install it via {RubyGems}[http://rub
 To install WLAPI ussue the following command:
   $ gem install wlapi
 
-You might want to install versions prior to +0.8.0+, if you are bound on the old implementations of {savon}[http://savonrb.com/]:
+The current version of WLAPI works with the second {Savon}[http://savonrb.com/version2/] generation. You might want to install versions prior to +0.8.0+, if you are bound on the old implementations of {savon}[http://savonrb.com/]:
   $ gem install wlapi -v 0.7.4
 
 If you want to do a system wide installation, do this as root (possibly using +sudo+).
 
 Alternatively use your <tt>Gemfile</tt> for dependency management.
 
+We are working on a <tt>.deb</tt> package, which will be released soon.
 
 == SYNOPSIS
 
