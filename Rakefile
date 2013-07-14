@@ -79,7 +79,8 @@ desc 'Tag the current source code version.'
 task :tag do
   # cb = current branch
   cb = `git branch`.split("\n").delete_if { |i| i !~ /[*]/ }
-  cb.first.sub('* ', '')
+  puts cb.inspect
+  cb = cb.first.sub('* ', '')
 
   if cb == 'master'
     system "git tag -am 'v#{WLAPI::VERSION}'"
