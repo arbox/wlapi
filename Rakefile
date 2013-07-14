@@ -1,3 +1,4 @@
+# -*- mode: ruby; -*-
 lib_path = File.expand_path(File.dirname(__FILE__) + '/lib')
 $LOAD_PATH.unshift(lib_path) unless $LOAD_PATH.include?(lib_path)
 
@@ -71,22 +72,30 @@ task :doc => [:clobber, :rdoc, :ydoc]
   
 desc 'Release the library.'
 task :release => [:tag, :build, :publish] do
-  
+  sh "bundle exec gem push wlapi-#{WLAPI::VERSION}.gem"
 end
 
 desc 'Tag the current source code version.'
 task :tag do
-  puts 'Tagging the version.'
+  # cb = current branch
+  cb = `git branch`.split("\n").delete_if { |i| i !~ /[*]/ }
+  cb.first.sub('* ', '')
+
+  if cb == 'master'
+    system "git tag -am 'v#{WLAPI::VERSION}'"
+  else
+    STDERR.puts "We are on branch #{cb}. Please switch to master branch."
+  end
 end
 
 desc 'Builds the .gem package.'
 task :build do
-  puts 'Building the package.'
+  sh 'bundle exec gem build wlapi.gemspec'
 end
 
 desc 'Publish the documentation on the homepage.'
 task :publish => [:clobber, :doc] do
-  system 'scp -r ydoc/* arbox@bu.chsta.be:/var/www/sites/bu.chsta.be/htdocs/shared/projects/wlapi'
+  system "scp -r ydoc/* #{File.read('SENSITIVE').chomp}"
 end
 
 task :travis do
@@ -97,10 +106,6 @@ task :travis do
   sh 'git add .gem-version'
   sh "git commit -m '#{message.chomp}'"
   sh 'git push origin master'
-end
-
-task :hello do
-
 end
 
 task :default => [:test]
