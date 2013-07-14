@@ -63,7 +63,6 @@ end
 
 desc 'Show the current version.'
 task :v do
-  load 'wlapi/version.rb'
   puts WLAPI::VERSION
 end
 
@@ -82,7 +81,7 @@ task :tag do
   cb = cb.first.sub('* ', '')
 
   if cb == 'master'
-    system "git tag -a -m 'v#{WLAPI::VERSION}'"
+    system "git tag 'v#{WLAPI::VERSION}'"
   else
     STDERR.puts "We are on branch #{cb}. Please switch to master branch."
   end
