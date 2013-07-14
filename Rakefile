@@ -82,7 +82,7 @@ task :tag do
   cb = cb.first.sub('* ', '')
 
   if cb == 'master'
-    system "git tag -am 'v#{WLAPI::VERSION}'"
+    system "git tag -a -m 'v#{WLAPI::VERSION}'"
   else
     STDERR.puts "We are on branch #{cb}. Please switch to master branch."
   end
