@@ -38,6 +38,8 @@ Refine semantic checks for two parameter methods.
 ### 0.8.7
 ### 0.8.8
 ### 0.8.9
+
 ### 0.9.0
+Add a command line tool to work with Wortschatz Lepzip. Package the lib, the cmd tool, and all the dependencies. Nokogiri is packaged by Lucas Nussbaumer.
 ### 1.0.0
 
