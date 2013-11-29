@@ -19,14 +19,14 @@ Gem::Specification.new do |s|
   s.add_development_dependency('bundler')
   s.add_development_dependency('yard')
   s.add_development_dependency('rake')
-  s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.rdoc']
+  s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.md']
   s.rdoc_options = ['-m', 'README.rdoc']
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>=1.8.5'
   s.files = FileList['lib/**/*.rb',
                      'README.rdoc',
                      'LICENSE.rdoc',
-                     'CHANGELOG.rdoc',
+                     'CHANGELOG.md',
                      '.yardopts',
                      'test/**/*'].to_a
   s.test_files = FileList['test/**/*'].to_a
