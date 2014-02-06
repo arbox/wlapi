@@ -57,8 +57,21 @@ end
 
 
 desc 'Open an irb session preloaded with this library.'
-task :console do
-  sh 'irb -rubygems -I lib -r wlapi'
+task :irb do
+#  sh 'irb -rubygems -I lib -r wlapi'
+  require 'irb'
+  require 'irb/completion'
+  require 'wlapi'
+  ARGV.clear
+  IRB.start
+end
+
+desc 'Open a Pry session in the context of this library.'
+task :pry do
+  require 'pry'
+  require 'wlapi'
+  ARGV.clear
+  Pry.start
 end
 
 desc 'Show the current version.'
