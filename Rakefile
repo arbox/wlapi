@@ -120,4 +120,4 @@ task :travis do
   sh 'git push origin master'
 end
 
-task :default => [:test]
+task :default => 'test:all'

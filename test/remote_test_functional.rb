@@ -151,4 +151,12 @@ class TestApi < Test::Unit::TestCase
     response = execute(expectation, :crossword, '%uto', 4, 200)
     assert(response.length == 24)
   end
+
+  def test_ngram
+    flunk
+  end
+
+  def test_ngram_references
+    flunk
+  end
 end

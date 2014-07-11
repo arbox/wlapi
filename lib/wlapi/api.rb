@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-# 2010-2013, Andrei Beliankou
+# 2010-2014, Andrei Beliankou
 
 # :title: Ruby based API for Wortschatz Leipzig web services
 # :main: README.rdoc
@@ -8,6 +8,8 @@ require 'savon'
 require 'wlapi/error'
 
 # REXML is fast enough for our task.
+# But we consider using Nokogiri since Savon depends on it
+# and we won't introduce additional dependencies.
 require 'rexml/document'
 include REXML
 
@@ -411,15 +413,15 @@ module WLAPI
       } if args[0]
       # Setting the second argument (usually 'Limit').
       v << {'dat:dataRow'=>[
-                            args[1][0],
-                            args[1][1]
-                           ]
+              args[1][0],
+              args[1][1]
+            ]
       } if args[1]
       # Setting the third argument (no common value)
       v << {'dat:dataRow'=>[
-                            args[2][0],
-                                args[2][1]
-                           ]
+              args[2][0],
+              args[2][1]
+            ]
       } if args[2]
       
       begin
