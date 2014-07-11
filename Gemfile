@@ -16,4 +16,5 @@ group :development do
   gem 'travis-lint'
   gem 'webmock'
   gem 'pry'
+  gem 'vcr'
 end
