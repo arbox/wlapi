@@ -7,7 +7,6 @@
 {<img src="https://badge.fury.io/rb/wlapi.png" alt="Gem Version" />}[http://badge.fury.io/rb/wlapi]
 {<img src="https://travis-ci.org/arbox/wlapi.png" alt="Build Status" />}[https://travis-ci.org/arbox/wlapi]
 {<img src="https://codeclimate.com/github/arbox/wlapi.png" alt="Code Climate" />}[https://codeclimate.com/github/arbox/wlapi]
-{<img alt="Bitdeli Badge" src="https://d2weczhvl823v0.cloudfront.net/arbox/wlapi/trend.png" />}[https://bitdeli.com/free]
 
 == DESCRIPTION
 WLAPI is a programmatic API for web services provided by the project {Wortschatz}[http://wortschatz.uni-leipzig.de/], University of Leipzig. These services are a great source of linguistic knowledge for morphological, syntactic and semantic analysis of German both for traditional and Computational Linguistics (CL).
@@ -111,6 +110,6 @@ you might face some not implemented features.
 Please contact me with your suggestions, bug reports and feature requests.
 == LICENSE
 
-WLAPI is a copyrighted software by Andrei Beliankou, 2010-2013
+WLAPI is a copyrighted software by Andrei Beliankou, 2010-2014
 
 You may use, redistribute and change it under the terms provided in the LICENSE file.
