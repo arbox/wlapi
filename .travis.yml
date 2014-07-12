@@ -17,6 +17,7 @@ matrix:
   allow_failures:
     - rvm: jruby-18mode
     - rvm: rbx-18mode
+    - rvm: rbx-19mode
 
 notifications:
   email:
