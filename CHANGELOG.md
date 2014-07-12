@@ -29,10 +29,12 @@ Initial release of the lib.
 
 ## PLANNED
 ### 0.8.7
+  - Adjust gem version in <tt>Gemfile</tt>.
   - Rewrite tests using <tt>Minitest</tt>.
   - Test the lib against mri, rbx, jruby, win rubies.
   - Introduce <tt>nokogiri</tt> for parsing responses.
   - Refine semantic checks for two parameter methods.
+
 ### 0.8.8
 ### 0.8.9
 
