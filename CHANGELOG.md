@@ -1,4 +1,6 @@
 ## COMPLETED
+### 0.8.6
+Implemented <tt>ngrams</tt> and <tt>ngram_references</tt>.
 ### 0.8.5
 Finished the port to <tt>Savon 2</tt>.
 ### 0.8.4
@@ -26,16 +28,11 @@ Initial release of the lib.
 
 
 ## PLANNED
-
-### 0.8.6
-Implement <tt>ngrams</tt> and <tt>ngram_references</tt>.
-
-Test the lib against mri, rbx, jruby, win rubies.
-
-Introduce <tt>nokogiri</tt> for parsing responses.
-
-Refine semantic checks for two parameter methods.
 ### 0.8.7
+  - Rewrite tests using <tt>Minitest</tt>.
+  - Test the lib against mri, rbx, jruby, win rubies.
+  - Introduce <tt>nokogiri</tt> for parsing responses.
+  - Refine semantic checks for two parameter methods.
 ### 0.8.8
 ### 0.8.9
 
