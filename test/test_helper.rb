@@ -5,6 +5,7 @@ module TestHelper
     rescue => error
       if error.message =~ /(Server shutdown in progress)|(404)/i
         result = expectation
+        warn(error.message)
       else
         raise        
       end

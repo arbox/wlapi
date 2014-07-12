@@ -84,11 +84,11 @@ class TestInterface < Test::Unit::TestCase
   end
 
   def test_missing_methods
-    assert_raise(NotImplementedError) do
+    assert_raise(WLAPI::ExternalError) do
       @api.ngrams('Haus')
     end
 
-    assert_raise(NotImplementedError) do
+    assert_raise(WLAPI::ExternalError) do
       @api.ngram_references('Haus')
     end
   end

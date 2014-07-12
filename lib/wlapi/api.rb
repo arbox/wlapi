@@ -21,7 +21,7 @@ module WLAPI
   #
   # See the project 'Wortschatz Leipzig' for more details.
   class API
-    
+
     # SOAP Services Endpoint.
     ENDPOINT = 'http://wortschatz.uni-leipzig.de/axis/services'
 
@@ -43,30 +43,6 @@ module WLAPI
 
       SERVICES.each { |service| @services[service] = "#{ENDPOINT}/#{service}"}
 
-=begin
-      @services = {
-        :Thesaurus => "#{endpoint}/Thesaurus",
-        :Baseform => "#{endpoint}/Baseform",
-        :Similarity => "#{endpoint}/Similarity",
-        :Synonyms => "#{endpoint}/Synonyms",
-        :Sachgebiet => "#{endpoint}/Sachgebiet",
-        :Frequencies => "#{endpoint}/Frequencies",
-        :Kookurrenzschnitt => "#{endpoint}/Kookkurrenzschnitt",
-        :ExperimentalSynonyms => "#{endpoint}/ExperimentalSynonyms",
-        :RightCollocationFinder => "#{endpoint}/RightCollocationFinder",
-        :LeftCollocationFinder => "#{endpoint}/LeftCollocationFinder",
-        :Wordforms => "#{endpoint}/Wordforms",
-        :CooccurrencesAll => "#{endpoint}/CooccurrencesAll",
-        :LeftNeighbours => "#{endpoint}/LeftNeighbours",
-        :RightNeighbours => "#{endpoint}/RightNeighbours",
-        :Sentences => "#{endpoint}/Sentences",
-        :Cooccurrences => "#{endpoint}/Cooccurrences",
-        :Kreuzwortraetsel => "#{endpoint}/Kreuzwortraetsel",
-        :NGrams => "#{endpoint}/NGrams",
-        :NGramReferences => "#{endpoint}/NGramReferences"
-        # no MARSService
-      }
-=end      
       # cl short for client.
       # Dynamically create all the clients and set access credentials.
       # It can be a very bad idea to instantiate all the clients at once,
@@ -76,22 +52,22 @@ module WLAPI
         cl_name = '@cl_' + key.to_s
 
         options = {:wsdl => val + "?wsdl",
-          :namespaces => {'xmlns:dat' => 'http://datatypes.webservice.wortschatz.uni_leipzig.de',
-            'xmlns:urn' => val},
-          :basic_auth => ['anonymous', 'anonymous'],
-          :log => $DEBUG
-        }
+                   :namespaces => {'xmlns:dat' => 'http://datatypes.webservice.wortschatz.uni_leipzig.de',
+                                   'xmlns:urn' => val},
+                   :basic_auth => ['anonymous', 'anonymous'],
+                   :log => $DEBUG
+                  }
         client = Savon.client(options)
         eval("#{cl_name} = client")
       end
-      
+
       # Savon creates very verbose logs, switching off.
-#      Savon.configure do |config|
-#        config.log = false unless $DEBUG
-#      end
+      #      Savon.configure do |config|
+      #        config.log = false unless $DEBUG
+      #      end
       HTTPI.log = false unless $DEBUG
     end
-    
+
     # Main methods to access different services.
     #
     # You can define the limit for the result set, it defaults to 10.
@@ -99,36 +75,36 @@ module WLAPI
     # which would be greater than the result set since we cannot
     # predict how many answers the server will give us.
     #############################################################################
-    
+
     ## One parameter methods.
     #############################################################################
-    
+
     # Returns the frequency and frequency class of the input word.
     # Frequency class is computed in relation to the most frequent word
     # in the corpus. The higher the class, the rarer the word:
     #   api.frequencies("Autos") => ["40614", "9"]
     def frequencies(word)
       check_params(word)
-      
+
       arg1 = ['Wort', word]
       answer = query(@cl_Frequencies, arg1)
 
       get_answer(answer)
     end
-    
+
     # Gets the baseform (whatever it is :), not lemma).
     # Returns the lemmatized (base) form of the input word
     # and the POS tag in an array:
     #   api.baseform("Auto") => ["Auto", "N"]
     def baseform(word)
       check_params(word)
-      
+
       arg1 = ['Wort', word]
       answer = query(@cl_Baseform, arg1)
 
       get_answer(answer)
     end
-    
+
     # Returns categories for a given input word as an array:
     #   api.domain("Michael") => ["Vorname", "Nachname", "Männername"]
     #--
@@ -136,57 +112,57 @@ module WLAPI
     # let's call it domain, not sachgebiet
     def domain(word)
       check_params(word)
-      
+
       arg1 = ['Wort', word]
       answer = query(@cl_Sachgebiet, arg1)
-      
+
       get_answer(answer)
     end
 
     ## Two parameter methods.
     #############################################################################
-    
+
     # Returns all other word forms of the same lemma for a given word form.
     #   api.wordforms("Auto") => ["Auto", "Autos"]
     def wordforms(word, limit = 10)
       check_params(word, limit)
-      
+
       # note, it is the only service which requires 'Word', not 'Wort'
       arg1 = ['Word', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_Wordforms, arg1, arg2)
-      
+
       get_answer(answer)
     end
-    
+
     # As the Synonyms service returns synonyms of the given input word.
     # However, this first builds a lemma of the input word
     # and thus returns more synonyms:
     #   api.thesaurus("Auto") => ["Auto", "Bahn", "Wagen", "Zug", "Schiff", ...]
     def thesaurus(word, limit = 10)
       check_params(word, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_Thesaurus, arg1, arg2)
-      
+
       get_answer(answer)
     end
-    
+
     # This method searches for synonyms.
     # Returns synonyms of the input word. In other words, this is a thesaurus.
     #   api.synonyms("Auto") => ["Kraftwagen", "Automobil", "Benzinkutsche", ...]
     def synonyms(word, limit = 10)
       check_params(word, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_Synonyms, arg1, arg2)
 
-      # Synonym service provides multiple values, so we take only odd. 
+      # Synonym service provides multiple values, so we take only odd.
       get_answer(answer, '[position() mod 2 = 1 ]')
     end
-    
+
     # Returns sample sentences containing the input word.
     # The return value is an array:
     #   api.sentences("Auto") => ["40808144", "Zweitens der freche,
@@ -197,14 +173,14 @@ module WLAPI
     # ok, but results should be filtered
     def sentences(word, limit = 10)
       check_params(word, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_Sentences, arg1, arg2)
-      
+
       get_answer(answer)
     end
-    
+
     # For a given input word, returns statistically significant left neighbours
     # (words co-occurring immediately to the left of the input word).
     #   api.left_neighbours("Auto") => ["geparktes", "Auto", "561", ...]
@@ -212,14 +188,14 @@ module WLAPI
     # ok, but results should be filtered
     def left_neighbours(word, limit = 10)
       check_params(word, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_LeftNeighbours, arg1, arg2)
-      
+
       get_answer(answer)
     end
-    
+
     # For a given input word, returns statistically significant right neighbours
     # (words co-occurring immediately to the right of the input word).
     #   api.right_neighbours("Auto") => ["Auto", "erfaßt", "575", ...]
@@ -227,15 +203,15 @@ module WLAPI
     # ok, but results should be filtered
     def right_neighbours(word, limit = 10)
       check_params(word, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_RightNeighbours, arg1, arg2)
-      
+
       get_answer(answer)
     end
-    
-    
+
+
     # Returns automatically computed contextually similar words
     # of the input word.
     # Such similar words may be antonyms, hyperonyms, synonyms,
@@ -245,39 +221,47 @@ module WLAPI
     #   api.similarity("Auto") => ["Auto", "Wagen", "26", ...]
     def similarity(word, limit = 10)
       check_params(word, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_Similarity, arg1, arg2)
-      
+
       get_answer(answer)
     end
-    
+
     # This service delivers an experimental synonyms request for internal tests.
     #--
     # don't know, if we have to include this service...
     def experimental_synonyms(word, limit = 10)
       check_params(word, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Limit', limit]
       answer = query(@cl_ExperimentalSynonyms, arg1, arg2)
-      
+
       get_answer(answer)
     end
 
-    #
+    # @todo
     def ngrams(pattern, limit = 10)
-      raise(NotImplementedError, 'This method will be implemented in the next release.')
+
+      arg1 = ['Pattern', pattern]
+      arg2 = ['Limit', limit]
+      answer = query(@cl_NGrams, arg1, arg2)
+    #raise(NotImplementedError, 'This method will be implemented in the next release.')
     end
+
     #
     def ngram_references(pattern, limit = 10)
-      raise(NotImplementedError, 'This method will be implemented in the next release.')
+      arg1 = ['Pattern', pattern]
+      arg2 = ['Limit', limit]
+      answer = query(@cl_NGramReferences, arg1, arg2)
+    #raise(NotImplementedError, 'This method will be implemented in the next release.')
     end
-    
+
     ## Three parameter methods.
     #############################################################################
-    
+
     # Attempts to find linguistic collocations that occur to the right
     # of the given input word.
     # The parameter 'Wortart' accepts four values 'A, V, N, S'
@@ -288,15 +272,15 @@ module WLAPI
     #   ["Auto", "abfackeln", "V", ...]
     def right_collocation_finder(word, pos, limit = 10)
       check_params(word, pos, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Wortart', pos]
       arg3 = ['Limit', limit]
       answer = query(@cl_RightCollocationFinder, arg1, arg2, arg3)
-      
+
       get_answer(answer)
     end
-    
+
     # Attempts to find linguistic collocations that occur to the left
     # of the given input word.
     # The parameter 'Wortart' accepts four values 'A, V, N, S'
@@ -307,39 +291,39 @@ module WLAPI
     #   ["apostolisch", "A", "Stuhl", ...]
     def left_collocation_finder(word, pos, limit = 10)
       check_params(word, pos, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Wortart', pos]
       arg3 = ['Limit', limit]
       answer = query(@cl_LeftCollocationFinder, arg1, arg2, arg3)
-      
+
       get_answer(answer)
     end
-    
+
     # Returns statistically significant co-occurrences of the input word.
     def cooccurrences(word, sign, limit = 10)
       check_params(word, sign, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Mindestsignifikanz', sign]
       arg3 = ['Limit', limit]
       answer = query(@cl_Cooccurrences, arg1, arg2, arg3)
-      
+
       get_answer(answer)
     end
-    
+
     # Returns statistically significant co-occurrences of the input word.
     # However, it searches in the unrestricted version of the co-occurrences
     # table as in the Cooccurrences services,
     # which means significantly longer wait times.
     def cooccurrences_all(word, sign, limit = 10)
       check_params(word, sign, limit)
-      
+
       arg1 = ['Wort', word]
       arg2 = ['Mindestsignifikanz', sign]
       arg3 = ['Limit', limit]
       answer = query(@cl_CooccurrencesAll, arg1, arg2, arg3)
-      
+
       get_answer(answer)
     end
 
@@ -352,21 +336,21 @@ module WLAPI
     # is being used INTERN, we need additional credentials
     def intersection(word1, word2, limit = 10)
       check_params(word1, word2, limit)
-      
+
       arg1 = ['Wort 1', word1]
       arg2 = ['Wort 2', word2]
       arg3 = ['Limit', limit]
       answer = query(@cl_Kookurrenzschnitt, arg1, arg2, arg3)
-      
-      get_answer(answer)
-    end    
 
-    # Attempts to find suitable words given a pattern as word parameter, 
+      get_answer(answer)
+    end
+
+    # Attempts to find suitable words given a pattern as word parameter,
     # a word length and the number of words to find at max (limit),
     # e.g. <tt>API#crossword('%uto', 4)</tt> would return find 24 results and
     # return them as an array: <tt>[Auto, Auto, ...]</tt>:
     #   api.crossword('%uto') => ["Auto", "Auto", ...]
-    # SQL like syntax is used for pattern (<tt>%</tt> for an arbitrary string, 
+    # SQL like syntax is used for pattern (<tt>%</tt> for an arbitrary string,
     # <tt>_</tt> for a single character).
     #
     # Note: Umlaute will count as one character
@@ -381,20 +365,20 @@ module WLAPI
       arg2 = ['Wortlaenge', word_length]
       arg3 = ['Limit', limit]
       answer = query(@cl_Kreuzwortraetsel, arg1, arg2, arg3)
-      
+
       get_answer(answer)
     end
-    
+
     private
-    
+
     # Main query method, it invokes the soap engine.
     # It combines all the data to one SOAP request and gets the answer.
     # <args> contains an array [[key1, value1], [key2, value2], [key3, value3]]
     # with keys and values for the soap query.
     def query(cl, *args)
       # WSDL is disabled since calling the server for wsdl can last too long.
-          
-             
+
+
       v = []
       body = {
         'urn:objRequestParameters' => {
@@ -404,12 +388,12 @@ module WLAPI
           }
         }
       }
-      
+
       # Setting the first argument (usually 'Wort').
       v << {'dat:dataRow'=>[
-                            args[0][0],
-                            args[0][1]
-                           ]
+              args[0][0],
+              args[0][1]
+            ]
       } if args[0]
       # Setting the second argument (usually 'Limit').
       v << {'dat:dataRow'=>[
@@ -423,19 +407,19 @@ module WLAPI
               args[2][1]
             ]
       } if args[2]
-      
+
       begin
         resp = cl.call(:execute, {:message => body})
       rescue => e
         fail(WLAPI::ExternalError, e)
       end
-      
+
       doc = Document.new(resp.to_xml)
       warn(doc) if $DEBUG
-      
-      doc      
+
+      doc
     end
-    
+
     # This method extracts valuable data from the XML structure
     # of the soap response. It returns an array with extracted xml text nodes
     # or nil, if the service provided no answer.
@@ -479,7 +463,7 @@ module WLAPI
 
     def msg(arg, meth, cls)
       "Argument <#{arg}> for the method <#{meth}> should be a <#{cls}>, " +
-      "not <#{arg.class}>!"
+        "not <#{arg.class}>!"
     end
   end # class
 end # module
