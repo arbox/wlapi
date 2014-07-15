@@ -1,4 +1,10 @@
+require 'yaml'
+
 module TestHelper
+  credentials = YAML.load_file('SENSITIVE')['credentials']
+  USER = credentials['user']
+  PASS = credentials['pass']
+
   def execute(expectation, method, *args)
     begin
       result = @api.send(method, *args)

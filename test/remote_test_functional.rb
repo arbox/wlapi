@@ -7,7 +7,7 @@ class TestApi < Test::Unit::TestCase
   include TestHelper
   
   def setup
-    @api = WLAPI::API.new
+    @api = WLAPI::API.new(USER, PASS)
   end
 
   def teardown
