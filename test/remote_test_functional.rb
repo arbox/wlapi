@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
+require 'yaml'
 require 'test/unit'
 require 'test_helper.rb'
 require 'wlapi'
 
 class TestApi < Test::Unit::TestCase
   include TestHelper
+
+  credentials = YAML.load_file('SENSITIVE')['credentials']
+  USER = credentials['user']
+  PASS = credentials['pass']
   
   def setup
     @api = WLAPI::API.new(USER, PASS)
