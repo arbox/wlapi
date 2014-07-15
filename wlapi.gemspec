@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.email = "arbox@bu.chsta.be"
   s.homepage = 'http://bu.chsta.be/projects/wlapi/'
   s.add_runtime_dependency('savon', '~> 2.1')
-  s.add_development_dependency('rdoc', '>=3.9.1')
-  s.add_development_dependency('bundler')
-  s.add_development_dependency('yard')
-  s.add_development_dependency('rake')
+  s.add_development_dependency('rdoc', '~> 4.1')
+  s.add_development_dependency('bundler', '~> 1.6')
+  s.add_development_dependency('yard', '~> 0.8')
+  s.add_development_dependency('rake', '~> 10.3')
   s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.md']
   s.rdoc_options = ['-m', 'README.rdoc']
   s.platform = Gem::Platform::RUBY
@@ -30,4 +30,5 @@ Gem::Specification.new do |s|
                      '.yardopts',
                      'test/**/*'].to_a
   s.test_files = FileList['test/**/*'].to_a
+  s.licenses = 'MIT'
 end
