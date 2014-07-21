@@ -2,5 +2,5 @@
 --protected
 --title 'WLAPI - Ruby based API for Wortschatz Leipzig web services'
 -
-CHANGELOG.rdoc
+CHANGELOG.md
 LICENSE.rdoc
