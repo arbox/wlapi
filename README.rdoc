@@ -20,6 +20,8 @@ in other language specific bindings:
 * {PHP}[http://web.archive.org/web/20090418233940/http://blog.klassifikator.de/2009/03/php-implementierung-des-wortschatz-webservice-der-uni-leipzig/]
 * {C#}[http://code-bude.net/2013/07/22/csharp-api-fuer-den-wortschatz-leipzig-thesaurus-webservic/]
 
+The original Java based clients with many examples can be found on the {project overview page}[http://wortschatz.uni-leipzig.de/axis/servlet/ServiceOverviewServlet].
+
 === Implemented Features
 You can use the following search methods:
 * <tt>#baseform</tt>;
