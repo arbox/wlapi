@@ -50,7 +50,7 @@ The interface will be slightly changed in the version <tt>1.0</tt> to be more re
 There are two additional services by Wortschatz Leipzig: MARS and Kookurrenzschnitt. They will not be implemented due to internal restrictions of the service provider.
 
 == INSTALLATION
-WLAPI is provided as a .gem package. Simply install it via {RubyGems}[http://rubygems.org/gems/wlapi].
+WLAPI is provided as a <tt>.gem</tt> package. Simply install it via {RubyGems}[http://rubygems.org/gems/wlapi].
 
 To install WLAPI ussue the following command:
   $ gem install wlapi
