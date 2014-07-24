@@ -2,6 +2,7 @@
 lib_path = File.expand_path(File.dirname(__FILE__) + '/lib')
 $LOAD_PATH.unshift(lib_path) unless $LOAD_PATH.include?(lib_path)
 
+require 'yaml'
 require 'wlapi/version'
 require 'time'
 
@@ -107,7 +108,7 @@ end
 
 desc 'Publish the documentation on the homepage.'
 task :publish => [:clobber, :doc] do
-  system "scp -r ydoc/* #{File.read('SENSITIVE').chomp}"
+  system "scp -r ydoc/* #{YAML.load_file('SENSITIVE')['url']}"
 end
 
 task :travis do
