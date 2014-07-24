@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 # 2010-2014, Andrei Beliankou
+# @author Andrei Beliankou
 
 # :title: Ruby based API for Wortschatz Leipzig web services
 # :main: README.rdoc
@@ -83,6 +84,7 @@ module WLAPI
     # Frequency class is computed in relation to the most frequent word
     # in the corpus. The higher the class, the rarer the word:
     #   api.frequencies("Autos") => ["40614", "9"]
+    # @return [Array] a list
     def frequencies(word)
       check_params(word)
 
@@ -96,6 +98,7 @@ module WLAPI
     # Returns the lemmatized (base) form of the input word
     # and the POS tag in an array:
     #   api.baseform("Auto") => ["Auto", "N"]
+    # @return [Array] a list
     def baseform(word)
       check_params(word)
 
@@ -124,6 +127,7 @@ module WLAPI
 
     # Returns all other word forms of the same lemma for a given word form.
     #   api.wordforms("Auto") => ["Auto", "Autos"]
+    # @return [Array] a list
     def wordforms(word, limit = 10)
       check_params(word, limit)
 
@@ -139,6 +143,7 @@ module WLAPI
     # However, this first builds a lemma of the input word
     # and thus returns more synonyms:
     #   api.thesaurus("Auto") => ["Auto", "Bahn", "Wagen", "Zug", "Schiff", ...]
+    # @return [Array] a list
     def thesaurus(word, limit = 10)
       check_params(word, limit)
 
@@ -152,6 +157,7 @@ module WLAPI
     # This method searches for synonyms.
     # Returns synonyms of the input word. In other words, this is a thesaurus.
     #   api.synonyms("Auto") => ["Kraftwagen", "Automobil", "Benzinkutsche", ...]
+    # @return [Array] a list
     def synonyms(word, limit = 10)
       check_params(word, limit)
 
@@ -170,7 +176,7 @@ module WLAPI
     #   und drittens die hinreißend gestylten 16-Zoll-Felgen,
     #   die es leider nur für dieses Auto gibt.", ...]
     #--
-    # ok, but results should be filtered
+    # @todo ok, but results should be filtered
     def sentences(word, limit = 10)
       check_params(word, limit)
 
@@ -185,7 +191,7 @@ module WLAPI
     # (words co-occurring immediately to the left of the input word).
     #   api.left_neighbours("Auto") => ["geparktes", "Auto", "561", ...]
     #--
-    # ok, but results should be filtered
+    # @todo ok, but results should be filtered
     def left_neighbours(word, limit = 10)
       check_params(word, limit)
 
@@ -200,7 +206,7 @@ module WLAPI
     # (words co-occurring immediately to the right of the input word).
     #   api.right_neighbours("Auto") => ["Auto", "erfaßt", "575", ...]
     #--
-    # ok, but results should be filtered
+    # @todo ok, but results should be filtered
     def right_neighbours(word, limit = 10)
       check_params(word, limit)
 
@@ -242,7 +248,7 @@ module WLAPI
       get_answer(answer)
     end
 
-    # @todo
+    # @todo Define the syntax for the pattern, fix the corpus.
     def ngrams(pattern, limit = 10)
 
       arg1 = ['Pattern', pattern]
@@ -251,7 +257,7 @@ module WLAPI
     #raise(NotImplementedError, 'This method will be implemented in the next release.')
     end
 
-    #
+    # @todo Define the syntax for the pattern, fix the corpus.
     def ngram_references(pattern, limit = 10)
       arg1 = ['Pattern', pattern]
       arg2 = ['Limit', limit]
