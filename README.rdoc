@@ -9,18 +9,26 @@
 {<img src="https://codeclimate.com/github/arbox/wlapi.png" alt="Code Climate" />}[https://codeclimate.com/github/arbox/wlapi]
 
 == DESCRIPTION
-WLAPI is a programmatic API for web services provided by the project {Wortschatz}[http://wortschatz.uni-leipzig.de/], University of Leipzig. These services are a great source of linguistic knowledge for morphological, syntactic and semantic analysis of German both for traditional and Computational Linguistics (CL).
+WLAPI is a programmatic API for web services provided by the project
+{Wortschatz}[http://wortschatz.uni-leipzig.de/], University of Leipzig. These
+services are a great source of linguistic knowledge for morphological, syntactic
+and semantic analysis of German both for traditional and Computational
+Linguistics (CL).
 
-Use this API to gain data on word frequencies, left and right neighbours, collocations and semantic similarity. Check it out if you are interested in Natural Language Processing (NLP) and Human Language Technology (HLT).
+Use this API to gain data on word frequencies, left and right neighbours,
+collocations and semantic similarity. Check it out if you are interested
+in Natural Language Processing (NLP) and Human Language Technology (HLT).
 
-This library is a set of Ruby bindings for the following featuren. You may also be interested
-in other language specific bindings:
+This library is a set of Ruby bindings for the following featuren. You may also
+be interested in other language specific bindings:
+
 * {Perl}[http://search.cpan.org/~schroeer/Lingua-DE-Wortschatz/]
 * {Python}[https://github.com/lehmannro/libleipzig-python]
 * {PHP}[http://web.archive.org/web/20090418233940/http://blog.klassifikator.de/2009/03/php-implementierung-des-wortschatz-webservice-der-uni-leipzig/]
 * {C#}[http://code-bude.net/2013/07/22/csharp-api-fuer-den-wortschatz-leipzig-thesaurus-webservic/]
 
-The original Java based clients with many examples can be found on the {project overview page}[http://wortschatz.uni-leipzig.de/axis/servlet/ServiceOverviewServlet].
+The original Java based clients with many examples can be found on the
+{project overview page}[http://wortschatz.uni-leipzig.de/axis/servlet/ServiceOverviewServlet].
 
 === Implemented Features
 You can use the following search methods:
@@ -43,19 +51,28 @@ You can use the following search methods:
 * <tt>#ngrams</tt>;
 * <tt>#ngram_references</tt>;
 
-The services <tt>NGrams</tt> and <tt>NGramReferences</tt> are under development and will be available soon. Both methods throw an <tt>NotImplementedError</tt> for now.
+The services <tt>NGrams</tt> and <tt>NGramReferences</tt> are under development
+and will be available soon. Both methods throw an <tt>NotImplementedError</tt>
+for now.
 
-The interface will be slightly changed in the version <tt>1.0</tt> to be more readable. For example, <tt>#cooccurrences_all</tt> will become <tt>#all_cooccurrences</tt>.
+The interface will be slightly changed in the version <tt>1.0</tt> to be more
+readable. For example, <tt>#cooccurrences_all</tt> may become
+<tt>#all_cooccurrences</tt>.
 
-There are two additional services by Wortschatz Leipzig: MARS and Kookurrenzschnitt. They will not be implemented due to internal restrictions of the service provider.
+There are two additional services by Wortschatz Leipzig: MARS and
+Kookurrenzschnitt. They will not be implemented due to internal restrictions of
+the service provider.
 
 == INSTALLATION
-WLAPI is provided as a <tt>.gem</tt> package. Simply install it via {RubyGems}[http://rubygems.org/gems/wlapi].
+WLAPI is provided as a <tt>.gem</tt> package. Simply install it via
+{RubyGems}[http://rubygems.org/gems/wlapi].
 
 To install WLAPI ussue the following command:
   $ gem install wlapi
 
-The current version of WLAPI works with the second {Savon}[http://savonrb.com/version2/] generation. You might want to install versions prior to +0.8.0+, if you are bound on the old implementations of {savon}[http://savonrb.com/]:
+The current version of WLAPI works with the second {Savon}[http://savonrb.com/version2/]
+generation. You might want to install versions prior to +0.8.0+, if you are bound
+on the old implementations of {savon}[http://savonrb.com/]:
   $ gem install wlapi -v 0.7.4
 
 If you want to do a system wide installation, do this as root (possibly using +sudo+).
@@ -107,7 +124,9 @@ If you want to intercept any and every exception thrown by WLAPI simply rescue
 If you have question, bug reports or any suggestions, please drop me an email :) 
 Any help is deeply appreciated!
 
-If you need some new functionality please contact me or provide a pull request. You code should be complete and tested. Please use <tt>local_*</tt> and <tt>remote_*</tt> naming convention for your tests.
+If you need some new functionality please contact me or provide a pull request.
+You code should be complete and tested. Please use <tt>local_*</tt> and
+<tt>remote_*</tt> naming convention for your tests.
 
 == CHANGELOG
 For details on future plan and working progress see CHANGELOG.
@@ -121,4 +140,5 @@ Please contact me with your suggestions, bug reports and feature requests.
 
 WLAPI is a copyrighted software by Andrei Beliankou, 2010-2014
 
-You may use, redistribute and change it under the terms provided in the LICENSE file.
+You may use, redistribute and change it under the terms provided
+in the LICENSE file.
