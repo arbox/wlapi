@@ -1,0 +1,221 @@
+--- 
+recorded_with: VCR 2.9.2
+http_interactions: 
+- request: 
+    method: get
+    uri: http://anonymous:anonymous@wortschatz.uni-leipzig.de/axis/services/Thesaurus?wsdl
+    body: 
+      string: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - Apache-Coyote/1.1
+      Transfer-Encoding: 
+      - chunked
+      X-Cache: 
+      - MISS from wortschatz.uni-leipzig.de
+      Date: 
+      - Tue, 29 Jul 2014 10:26:16 GMT
+      Content-Type: 
+      - text/xml;charset=utf-8
+    body: 
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <wsdl:definitions targetNamespace="urn:Thesaurus" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:Thesaurus" xmlns:intf="urn:Thesaurus" xmlns:tns1="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <!--WSDL created by Apache Axis version: 1.2RC3
+        Built on Mar 28, 2005 (10:34:47 CEST)-->
+         <wsdl:types>
+          <schema elementFormDefault="qualified" targetNamespace="urn:Thesaurus" xmlns="http://www.w3.org/2001/XMLSchema">
+           <import namespace="http://datatypes.webservice.wortschatz.uni_leipzig.de"/>
+           <element name="execute">
+            <complexType>
+             <sequence>
+              <element name="objRequestParameters" type="impl:RequestParameter"/>
+             </sequence>
+            </complexType>
+           </element>
+           <complexType name="DataMatrix">
+            <sequence>
+             <element maxOccurs="unbounded" name="dataVectors" type="tns1:DataVector"/>
+            </sequence>
+           </complexType>
+           <complexType name="RequestParameter">
+            <sequence>
+             <element name="corpus" nillable="true" type="xsd:string"/>
+             <element name="parameters" nillable="true" type="impl:DataMatrix"/>
+            </sequence>
+           </complexType>
+           <element name="executeResponse">
+            <complexType>
+             <sequence>
+              <element name="executeReturn" type="impl:ResponseParameter"/>
+             </sequence>
+            </complexType>
+           </element>
+           <complexType name="ResponseParameter">
+            <sequence>
+             <element name="executionTime" nillable="true" type="xsd:string"/>
+             <element name="result" nillable="true" type="impl:DataMatrix"/>
+             <element name="serviceMagnitude" type="xsd:int"/>
+             <element name="userAmount" type="xsd:int"/>
+             <element name="userMaxLimit" type="xsd:int"/>
+            </sequence>
+           </complexType>
+           <element name="ping">
+            <complexType/>
+           </element>
+           <element name="pingResponse">
+            <complexType>
+             <sequence>
+              <element name="pingReturn" type="xsd:string"/>
+             </sequence>
+            </complexType>
+           </element>
+          </schema>
+          <schema elementFormDefault="qualified" targetNamespace="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns="http://www.w3.org/2001/XMLSchema">
+           <import namespace="urn:Thesaurus"/>
+           <complexType name="DataVector">
+            <sequence>
+             <element maxOccurs="unbounded" name="dataRow" type="xsd:string"/>
+            </sequence>
+           </complexType>
+          </schema>
+         </wsdl:types>
+        
+           <wsdl:message name="pingRequest">
+        
+              <wsdl:part element="impl:ping" name="parameters"/>
+        
+           </wsdl:message>
+        
+           <wsdl:message name="executeResponse">
+        
+              <wsdl:part element="impl:executeResponse" name="parameters"/>
+        
+           </wsdl:message>
+        
+           <wsdl:message name="pingResponse">
+        
+              <wsdl:part element="impl:pingResponse" name="parameters"/>
+        
+           </wsdl:message>
+        
+           <wsdl:message name="executeRequest">
+        
+              <wsdl:part element="impl:execute" name="parameters"/>
+        
+           </wsdl:message>
+        
+           <wsdl:portType name="Thesaurus">
+        
+              <wsdl:operation name="execute">
+        
+                 <wsdl:input message="impl:executeRequest" name="executeRequest"/>
+        
+                 <wsdl:output message="impl:executeResponse" name="executeResponse"/>
+        
+              </wsdl:operation>
+        
+              <wsdl:operation name="ping">
+        
+                 <wsdl:input message="impl:pingRequest" name="pingRequest"/>
+        
+                 <wsdl:output message="impl:pingResponse" name="pingResponse"/>
+        
+              </wsdl:operation>
+        
+           </wsdl:portType>
+        
+           <wsdl:binding name="ThesaurusSoapBinding" type="impl:Thesaurus">
+        
+              <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+              <wsdl:operation name="execute">
+        
+                 <wsdlsoap:operation soapAction=""/>
+        
+                 <wsdl:input name="executeRequest">
+        
+                    <wsdlsoap:body use="literal"/>
+        
+                 </wsdl:input>
+        
+                 <wsdl:output name="executeResponse">
+        
+                    <wsdlsoap:body use="literal"/>
+        
+                 </wsdl:output>
+        
+              </wsdl:operation>
+        
+              <wsdl:operation name="ping">
+        
+                 <wsdlsoap:operation soapAction=""/>
+        
+                 <wsdl:input name="pingRequest">
+        
+                    <wsdlsoap:body use="literal"/>
+        
+                 </wsdl:input>
+        
+                 <wsdl:output name="pingResponse">
+        
+                    <wsdlsoap:body use="literal"/>
+        
+                 </wsdl:output>
+        
+              </wsdl:operation>
+        
+           </wsdl:binding>
+        
+           <wsdl:service name="ThesaurusService">
+        
+              <wsdl:port binding="impl:ThesaurusSoapBinding" name="Thesaurus">
+        
+                 <wsdlsoap:address location="http://wortschatz.uni-leipzig.de:8100/axis/services/Thesaurus"/>
+        
+              </wsdl:port>
+        
+           </wsdl:service>
+        
+        </wsdl:definitions>
+
+    http_version: 
+  recorded_at: Tue, 29 Jul 2014 10:26:17 GMT
+- request: 
+    method: post
+    uri: http://anonymous:anonymous@wortschatz.uni-leipzig.de:8100/axis/services/Thesaurus
+    body: 
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:dat="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ins0="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:urn="http://wortschatz.uni-leipzig.de/axis/services/Thesaurus" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:impl="urn:Thesaurus"><env:Body><impl:execute><urn:objRequestParameters><urn:corpus>de</urn:corpus><urn:parameters><urn:dataVectors><dat:dataRow>Wort</dat:dataRow><dat:dataRow>Buch</dat:dataRow></urn:dataVectors><urn:dataVectors><dat:dataRow>Limit</dat:dataRow><dat:dataRow>10</dat:dataRow></urn:dataVectors></urn:parameters></urn:objRequestParameters></impl:execute></env:Body></env:Envelope>
+    headers: 
+      Soapaction: 
+      - "\"execute\""
+      Content-Length: 
+      - "805"
+      Content-Type: 
+      - text/xml;charset=UTF-8
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - Apache-Coyote/1.1
+      Transfer-Encoding: 
+      - chunked
+      Date: 
+      - Tue, 29 Jul 2014 10:26:15 GMT
+      Content-Type: 
+      - text/xml;charset=utf-8
+    body: 
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><executeResponse xmlns="urn:Thesaurus"><executeReturn><executionTime>0.059 s</executionTime><result><ns1:dataVectors xsi:type="ns2:DataVector" xmlns:ns1="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns2="urn:Thesaurus"><ns1:dataRow>Buch</ns1:dataRow></ns1:dataVectors><ns3:dataVectors xsi:type="ns4:DataVector" xmlns:ns3="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns4="urn:Thesaurus"><ns3:dataRow>Titel</ns3:dataRow></ns3:dataVectors><ns5:dataVectors xsi:type="ns6:DataVector" xmlns:ns5="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns6="urn:Thesaurus"><ns5:dataRow>Werk</ns5:dataRow></ns5:dataVectors><ns7:dataVectors xsi:type="ns8:DataVector" xmlns:ns7="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns8="urn:Thesaurus"><ns7:dataRow>Zeitung</ns7:dataRow></ns7:dataVectors><ns9:dataVectors xsi:type="ns10:DataVector" xmlns:ns9="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns10="urn:Thesaurus"><ns9:dataRow>Band</ns9:dataRow></ns9:dataVectors><ns11:dataVectors xsi:type="ns12:DataVector" xmlns:ns11="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns12="urn:Thesaurus"><ns11:dataRow>Literatur</ns11:dataRow></ns11:dataVectors><ns13:dataVectors xsi:type="ns14:DataVector" xmlns:ns13="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns14="urn:Thesaurus"><ns13:dataRow>Zeitschrift</ns13:dataRow></ns13:dataVectors><ns15:dataVectors xsi:type="ns16:DataVector" xmlns:ns15="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns16="urn:Thesaurus"><ns15:dataRow>Bruch</ns15:dataRow></ns15:dataVectors><ns17:dataVectors xsi:type="ns18:DataVector" xmlns:ns17="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns18="urn:Thesaurus"><ns17:dataRow>Lekt&#xFC;re</ns17:dataRow></ns17:dataVectors><ns19:dataVectors xsi:type="ns20:DataVector" xmlns:ns19="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns20="urn:Thesaurus"><ns19:dataRow>Schrift</ns19:dataRow></ns19:dataVectors></result><serviceMagnitude>0</serviceMagnitude><userAmount>1999241781</userAmount><userMaxLimit>-100</userMaxLimit></executeReturn></executeResponse></soapenv:Body></soapenv:Envelope>
+    http_version: 
+  recorded_at: Tue, 29 Jul 2014 10:26:17 GMT

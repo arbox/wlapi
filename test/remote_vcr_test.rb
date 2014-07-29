@@ -5,11 +5,6 @@ require 'test_helper.rb'
 require 'vcr'
 require 'wlapi'
 
-VCR.configure do |c|
-  c.cassette_library_dir = 'test/fixtures/vcr_cassettes'
-  c.hook_into :webmock
-end
-
 class TestApi < Test::Unit::TestCase
   include TestHelper
 
@@ -26,14 +21,12 @@ class TestApi < Test::Unit::TestCase
 
   # VCR Test
   def test_test
-    VCR.use_cassette('vcr_test') do
-      expectation = ["Buch",
-                     "Bücher",
-                     "Büchern",
-                     "Buches",
-                     "Buchs",
-                     "Bucher"]
-      execute(expectation, :wordforms, 'Buch')
-    end
+    expectation = ["Buch",
+                   "Bücher",
+                   "Büchern",
+                   "Buches",
+                   "Buchs",
+                   "Bucher"]
+    execute(expectation, :wordforms, 'Buch')
   end
 end

@@ -1,0 +1,221 @@
+--- 
+recorded_with: VCR 2.9.2
+http_interactions: 
+- request: 
+    method: get
+    uri: http://anonymous:anonymous@wortschatz.uni-leipzig.de/axis/services/RightNeighbours?wsdl
+    body: 
+      string: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - Apache-Coyote/1.1
+      Transfer-Encoding: 
+      - chunked
+      X-Cache: 
+      - MISS from wortschatz.uni-leipzig.de
+      Date: 
+      - Tue, 29 Jul 2014 10:26:03 GMT
+      Content-Type: 
+      - text/xml;charset=utf-8
+    body: 
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <wsdl:definitions targetNamespace="urn:RightNeighbours" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:RightNeighbours" xmlns:intf="urn:RightNeighbours" xmlns:tns1="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <!--WSDL created by Apache Axis version: 1.2RC3
+        Built on Mar 28, 2005 (10:34:47 CEST)-->
+         <wsdl:types>
+          <schema elementFormDefault="qualified" targetNamespace="urn:RightNeighbours" xmlns="http://www.w3.org/2001/XMLSchema">
+           <import namespace="http://datatypes.webservice.wortschatz.uni_leipzig.de"/>
+           <element name="execute">
+            <complexType>
+             <sequence>
+              <element name="objRequestParameters" type="impl:RequestParameter"/>
+             </sequence>
+            </complexType>
+           </element>
+           <complexType name="DataMatrix">
+            <sequence>
+             <element maxOccurs="unbounded" name="dataVectors" type="tns1:DataVector"/>
+            </sequence>
+           </complexType>
+           <complexType name="RequestParameter">
+            <sequence>
+             <element name="corpus" nillable="true" type="xsd:string"/>
+             <element name="parameters" nillable="true" type="impl:DataMatrix"/>
+            </sequence>
+           </complexType>
+           <element name="executeResponse">
+            <complexType>
+             <sequence>
+              <element name="executeReturn" type="impl:ResponseParameter"/>
+             </sequence>
+            </complexType>
+           </element>
+           <complexType name="ResponseParameter">
+            <sequence>
+             <element name="executionTime" nillable="true" type="xsd:string"/>
+             <element name="result" nillable="true" type="impl:DataMatrix"/>
+             <element name="serviceMagnitude" type="xsd:int"/>
+             <element name="userAmount" type="xsd:int"/>
+             <element name="userMaxLimit" type="xsd:int"/>
+            </sequence>
+           </complexType>
+           <element name="ping">
+            <complexType/>
+           </element>
+           <element name="pingResponse">
+            <complexType>
+             <sequence>
+              <element name="pingReturn" type="xsd:string"/>
+             </sequence>
+            </complexType>
+           </element>
+          </schema>
+          <schema elementFormDefault="qualified" targetNamespace="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns="http://www.w3.org/2001/XMLSchema">
+           <import namespace="urn:RightNeighbours"/>
+           <complexType name="DataVector">
+            <sequence>
+             <element maxOccurs="unbounded" name="dataRow" type="xsd:string"/>
+            </sequence>
+           </complexType>
+          </schema>
+         </wsdl:types>
+        
+           <wsdl:message name="pingResponse">
+        
+              <wsdl:part element="impl:pingResponse" name="parameters"/>
+        
+           </wsdl:message>
+        
+           <wsdl:message name="executeRequest">
+        
+              <wsdl:part element="impl:execute" name="parameters"/>
+        
+           </wsdl:message>
+        
+           <wsdl:message name="pingRequest">
+        
+              <wsdl:part element="impl:ping" name="parameters"/>
+        
+           </wsdl:message>
+        
+           <wsdl:message name="executeResponse">
+        
+              <wsdl:part element="impl:executeResponse" name="parameters"/>
+        
+           </wsdl:message>
+        
+           <wsdl:portType name="RightNeighbours">
+        
+              <wsdl:operation name="execute">
+        
+                 <wsdl:input message="impl:executeRequest" name="executeRequest"/>
+        
+                 <wsdl:output message="impl:executeResponse" name="executeResponse"/>
+        
+              </wsdl:operation>
+        
+              <wsdl:operation name="ping">
+        
+                 <wsdl:input message="impl:pingRequest" name="pingRequest"/>
+        
+                 <wsdl:output message="impl:pingResponse" name="pingResponse"/>
+        
+              </wsdl:operation>
+        
+           </wsdl:portType>
+        
+           <wsdl:binding name="RightNeighboursSoapBinding" type="impl:RightNeighbours">
+        
+              <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+              <wsdl:operation name="execute">
+        
+                 <wsdlsoap:operation soapAction=""/>
+        
+                 <wsdl:input name="executeRequest">
+        
+                    <wsdlsoap:body use="literal"/>
+        
+                 </wsdl:input>
+        
+                 <wsdl:output name="executeResponse">
+        
+                    <wsdlsoap:body use="literal"/>
+        
+                 </wsdl:output>
+        
+              </wsdl:operation>
+        
+              <wsdl:operation name="ping">
+        
+                 <wsdlsoap:operation soapAction=""/>
+        
+                 <wsdl:input name="pingRequest">
+        
+                    <wsdlsoap:body use="literal"/>
+        
+                 </wsdl:input>
+        
+                 <wsdl:output name="pingResponse">
+        
+                    <wsdlsoap:body use="literal"/>
+        
+                 </wsdl:output>
+        
+              </wsdl:operation>
+        
+           </wsdl:binding>
+        
+           <wsdl:service name="RightNeighboursService">
+        
+              <wsdl:port binding="impl:RightNeighboursSoapBinding" name="RightNeighbours">
+        
+                 <wsdlsoap:address location="http://wortschatz.uni-leipzig.de:8100/axis/services/RightNeighbours"/>
+        
+              </wsdl:port>
+        
+           </wsdl:service>
+        
+        </wsdl:definitions>
+
+    http_version: 
+  recorded_at: Tue, 29 Jul 2014 10:26:04 GMT
+- request: 
+    method: post
+    uri: http://anonymous:anonymous@wortschatz.uni-leipzig.de:8100/axis/services/RightNeighbours
+    body: 
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:dat="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ins0="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:urn="http://wortschatz.uni-leipzig.de/axis/services/RightNeighbours" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:impl="urn:RightNeighbours"><env:Body><impl:execute><urn:objRequestParameters><urn:corpus>de</urn:corpus><urn:parameters><urn:dataVectors><dat:dataRow>Wort</dat:dataRow><dat:dataRow>Stuhl</dat:dataRow></urn:dataVectors><urn:dataVectors><dat:dataRow>Limit</dat:dataRow><dat:dataRow>2</dat:dataRow></urn:dataVectors></urn:parameters></urn:objRequestParameters></impl:execute></env:Body></env:Envelope>
+    headers: 
+      Soapaction: 
+      - "\"execute\""
+      Content-Length: 
+      - "817"
+      Content-Type: 
+      - text/xml;charset=UTF-8
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - Apache-Coyote/1.1
+      Transfer-Encoding: 
+      - chunked
+      Date: 
+      - Tue, 29 Jul 2014 10:26:03 GMT
+      Content-Type: 
+      - text/xml;charset=utf-8
+    body: 
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><executeResponse xmlns="urn:RightNeighbours"><executeReturn><executionTime>0.047 s</executionTime><result><ns1:dataVectors xsi:type="ns2:DataVector" xmlns:ns1="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns2="urn:RightNeighbours"><ns1:dataRow>Stuhl</ns1:dataRow><ns1:dataRow>r&#xE4;umen</ns1:dataRow><ns1:dataRow>189</ns1:dataRow></ns1:dataVectors><ns3:dataVectors xsi:type="ns4:DataVector" xmlns:ns3="http://datatypes.webservice.wortschatz.uni_leipzig.de" xmlns:ns4="urn:RightNeighbours"><ns3:dataRow>Stuhl</ns3:dataRow><ns3:dataRow>hin und her</ns3:dataRow><ns3:dataRow>130</ns3:dataRow></ns3:dataVectors></result><serviceMagnitude>0</serviceMagnitude><userAmount>1999241783</userAmount><userMaxLimit>-100</userMaxLimit></executeReturn></executeResponse></soapenv:Body></soapenv:Envelope>
+    http_version: 
+  recorded_at: Tue, 29 Jul 2014 10:26:04 GMT

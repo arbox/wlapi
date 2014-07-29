@@ -1,9 +1,19 @@
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'test/fixtures/vcr_cassettes'
+  c.hook_into :webmock
+end
+
 module TestHelper
 
   def execute(expectation, method, *args)
     begin
-      result = @api.send(method, *args)
+      result = VCR.use_cassette(method) do
+        @api.send(method, *args)
+      end
     rescue => error
+      # Servers are unreliable, sometimes we get this reboot message.
       if error.message =~ /(Server shutdown in progress)|(404)/i
         result = expectation
         warn(error.message)
