@@ -44,16 +44,16 @@ module WLAPI
     def initialize(login = 'anonymous', pass = 'anonymous')
 
       # This hash contains the URLs to the single services.
-      @services = {}
+      services = {}
 
-      SERVICES.each { |service| @services[service] = "#{ENDPOINT}/#{service}"}
+      SERVICES.each { |service| services[service] = "#{ENDPOINT}/#{service}"}
 
       # cl short for client.
       # Dynamically create all the clients and set access credentials.
       # It can be a very bad idea to instantiate all the clients at once,
       # we should investigate the typical user behaviour.
       # If only one service is used in the separate session => rewrite the class!
-      @services.each do |key, val|
+      services.each do |key, val|
         cl_name = '@cl_' + key.to_s
 
         options = {:wsdl => val + "?wsdl",
@@ -67,9 +67,6 @@ module WLAPI
       end
 
       # Savon creates very verbose logs, switching off.
-      #      Savon.configure do |config|
-      #        config.log = false unless $DEBUG
-      #      end
       HTTPI.log = false unless $DEBUG
     end
 
@@ -109,7 +106,7 @@ module WLAPI
       arg1 = ['Wort', word]
       answer = query(@cl_Baseform, arg1)
 
-      get_answer(answer)
+      #get_answer(answer)
     end
 
     # Returns categories for a given input word as an array:
