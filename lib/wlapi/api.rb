@@ -396,23 +396,31 @@ module WLAPI
       }
 
       # Setting the first argument (usually 'Wort').
-      v << {'dat:dataRow'=>[
-              args[0][0],
-              args[0][1]
-            ]
-      } if args[0]
+      if args[0]      
+        v << {'dat:dataRow' => [
+                args[0][0],
+                args[0][1]
+              ]
+        } 
+      end
+
       # Setting the second argument (usually 'Limit').
-      v << {'dat:dataRow'=>[
-              args[1][0],
-              args[1][1]
-            ]
-      } if args[1]
+      if args[1]
+        v << {'dat:dataRow' => [
+                args[1][0],
+                args[1][1]
+              ]
+        } 
+      end
+
       # Setting the third argument (no common value)
-      v << {'dat:dataRow'=>[
-              args[2][0],
-              args[2][1]
-            ]
-      } if args[2]
+      if args[2]
+        v << {'dat:dataRow' => [
+                args[2][0],
+                args[2][1]
+              ]
+        } 
+      end
 
       begin
         resp = cl.call(:execute, {:message => body})
