@@ -54,7 +54,7 @@ module WLAPI
       # we should investigate the typical user behaviour.
       # If only one service is used in the separate session => rewrite the class!
       services.each do |key, val|
-        cl_name = '@cl_' + key.to_s
+        cl_name = "@cl_#{key}"
 
         options = {:wsdl => val + "?wsdl",
                    :namespaces => {'xmlns:dat' => 'http://datatypes.webservice.wortschatz.uni_leipzig.de',
@@ -106,7 +106,7 @@ module WLAPI
       arg1 = ['Wort', word]
       answer = query(@cl_Baseform, arg1)
 
-      #get_answer(answer)
+      get_answer(answer)
     end
 
     # Returns categories for a given input word as an array:
