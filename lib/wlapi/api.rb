@@ -12,9 +12,8 @@ require 'wlapi/error'
 # But we consider using Nokogiri since Savon depends on it
 # and we won't introduce additional dependencies.
 require 'rexml/document'
-include REXML
 
-# Top level namespace wrapper for WLAPI
+
 module WLAPI
 
   # This class represents an interface to the linguistic web services
@@ -22,6 +21,7 @@ module WLAPI
   #
   # See the project 'Wortschatz Leipzig' for more details.
   class API
+    include REXML
 
     # SOAP Services Endpoint.
     ENDPOINT = 'http://wortschatz.uni-leipzig.de/axis/services'
