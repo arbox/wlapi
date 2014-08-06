@@ -28,11 +28,15 @@ module WLAPI
 
     # The list of accessible services, the MARSService is excluded due
     # to its internal authorization.
-    SERVICES = [:Thesaurus, :Baseform, :Similarity, :Synonyms, :Sachgebiet, :Frequencies,
-                :Kookurrenzschnitt, :ExperimentalSynonyms, :RightCollocationFinder,
-                :LeftCollocationFinder, :Wordforms, :CooccurrencesAll, :LeftNeighbours,
-                :RightNeighbours, :Sentences, :Cooccurrences, :Kreuzwortraetsel,
-                :NGrams, :NGramReferences]
+    SERVICES = [
+      :Baseform, :Cooccurrences, :CooccurrencesAll,
+      :ExperimentalSynonyms, :Frequencies,
+      :Kookurrenzschnitt, :Kreuzwortraetsel,
+      :LeftCollocationFinder, :LeftNeighbours, :NGrams,
+      :NGramReferences, :RightCollocationFinder,
+      :RightNeighbours, :Sachgebiet, :Sentences,
+      :Similarity, :Synonyms, :Thesaurus, :Wordforms
+    ]
 
     # At the creation point clients for all services are being instantiated.
     # You can also set the login and the password (it defaults to 'anonymous').
@@ -395,31 +399,13 @@ module WLAPI
         }
       }
 
+
+      # _args_ is an Array of arrays with keys and values
       # Setting the first argument (usually 'Wort').
-      if args[0]      
-        v << {'dat:dataRow' => [
-                args[0][0],
-                args[0][1]
-              ]
-        } 
-      end
-
       # Setting the second argument (usually 'Limit').
-      if args[1]
-        v << {'dat:dataRow' => [
-                args[1][0],
-                args[1][1]
-              ]
-        } 
-      end
-
-      # Setting the third argument (no common value)
-      if args[2]
-        v << {'dat:dataRow' => [
-                args[2][0],
-                args[2][1]
-              ]
-        } 
+      # Setting the third argument (no common value).
+      args.each do |key, val|
+        v << {'dat:dataRow' => [key, val]} 
       end
 
       begin
