@@ -62,7 +62,9 @@ module WLAPI
                    :basic_auth => ['anonymous', 'anonymous'],
                    :log => $DEBUG
                   }
+
         client = Savon.client(options)
+
         eval("#{cl_name} = client")
       end
 
@@ -462,5 +464,5 @@ module WLAPI
       "Argument <#{arg}> for the method <#{meth}> should be a <#{cls}>, " +
         "not <#{arg.class}>!"
     end
-  end # class
-end # module
+  end # class API
+end # module WLAPI
