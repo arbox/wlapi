@@ -52,7 +52,7 @@ namespace :test do
   task :remote do
     sh "#{interpreter} test/remote_*"
   end
-  
+
   task :all => [:local, :remote]
 end
 
@@ -82,7 +82,7 @@ end
 
 desc 'Document the code using Yard and RDoc.'
 task :doc => [:clobber, :rdoc, :ydoc]
-  
+
 desc 'Release the library.'
 task :release => [:tag, :build, :publish] do
   sh "bundle exec gem push wlapi-#{WLAPI::VERSION}.gem"
@@ -112,6 +112,7 @@ task :publish => [:clobber, :doc] do
 end
 
 task :travis do
+  sh 'git pull'
   message = "#{Time.now}\t#{WLAPI::VERSION}\n"
   File.open('.gem-version', 'w') do |file|
     file.write(message)
