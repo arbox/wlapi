@@ -6,7 +6,7 @@ source "http://rubygems.org"
 # Nokogiri 1.5.10 is the last version supporting Ruby 1.8.7.
 # Now added Nokogiri 1.5.11.
 if RUBY_VERSION =~ /1.8/
-  gem 'nokogiri', '~> 1.5.0'
+  gem 'nokogiri', '~> 1.5.11'
 end
 
 gemspec
