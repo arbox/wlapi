@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rdoc', '~> 4.1')
   s.add_development_dependency('bundler', '~> 1.6')
   s.add_development_dependency('yard', '~> 0.8')
-  s.add_development_dependency('rake', '~> 10.3')
+  s.add_development_dependency('rake', '~> 10.4')
   s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.md']
   s.rdoc_options = ['-m', 'README.rdoc']
   s.has_rdoc = 'yard'
