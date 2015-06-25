@@ -56,7 +56,7 @@ module WLAPI
       services.each do |key, val|
         cl_name = "@cl_#{key}"
 
-        options = {:wsdl => val + "?wsdl",
+        options = {:wsdl => val + '?wsdl',
                    :namespaces => {'xmlns:dat' => 'http://datatypes.webservice.wortschatz.uni_leipzig.de',
                                    'xmlns:urn' => val},
                    :basic_auth => ['anonymous', 'anonymous'],
@@ -78,10 +78,10 @@ module WLAPI
     # If you want to get all the results, you should provide a number,
     # which would be greater than the result set since we cannot
     # predict how many answers the server will give us.
-    #############################################################################
+    ############################################################################
 
     ## One parameter methods.
-    #############################################################################
+    ############################################################################
 
     # Returns the frequency and frequency class of the input word.
     # Frequency class is computed in relation to the most frequent word
@@ -126,7 +126,7 @@ module WLAPI
     end
 
     ## Two parameter methods.
-    #############################################################################
+    ############################################################################
 
     # Returns all other word forms of the same lemma for a given word form.
     #   api.wordforms("Auto") => ["Auto", "Autos"]
@@ -253,11 +253,10 @@ module WLAPI
 
     # @todo Define the syntax for the pattern, fix the corpus.
     def ngrams(pattern, limit = 10)
-
       arg1 = ['Pattern', pattern]
       arg2 = ['Limit', limit]
       answer = query(@cl_NGrams, arg1, arg2)
-    #raise(NotImplementedError, 'This method will be implemented in the next release.')
+    # raise(NotImplementedError, 'This method will be implemented in the next release.')
     end
 
     # @todo Define the syntax for the pattern, fix the corpus.
@@ -265,11 +264,11 @@ module WLAPI
       arg1 = ['Pattern', pattern]
       arg2 = ['Limit', limit]
       answer = query(@cl_NGramReferences, arg1, arg2)
-    #raise(NotImplementedError, 'This method will be implemented in the next release.')
+    # raise(NotImplementedError, 'This method will be implemented in the next release.')
     end
 
     ## Three parameter methods.
-    #############################################################################
+    ############################################################################
 
     # Attempts to find linguistic collocations that occur to the right
     # of the given input word.
@@ -386,8 +385,6 @@ module WLAPI
     # with keys and values for the soap query.
     def query(cl, *args)
       # WSDL is disabled since calling the server for wsdl can last too long.
-
-
       v = []
       body = {
         'urn:objRequestParameters' => {
@@ -398,19 +395,18 @@ module WLAPI
         }
       }
 
-
       # _args_ is an Array of arrays with keys and values
       # Setting the first argument (usually 'Wort').
       # Setting the second argument (usually 'Limit').
       # Setting the third argument (no common value).
       args.each do |key, val|
-        v << {'dat:dataRow' => [key, val]} 
+        v << {'dat:dataRow' => [key, val]}
       end
 
       begin
         resp = cl.call(:execute, {:message => body})
       rescue => e
-        fail(WLAPI::ExternalError, e)
+        raise(WLAPI::ExternalError, e)
       end
 
       doc = Document.new(resp.to_xml)
@@ -461,8 +457,8 @@ module WLAPI
     end
 
     def msg(arg, meth, cls)
-      "Argument <#{arg}> for the method <#{meth}> should be a <#{cls}>, " +
-        "not <#{arg.class}>!"
+      "Argument <#{arg}> for the method <#{meth}> should be a <#{cls}>, "\
+      "not <#{arg.class}>!"
     end
   end # class API
 end # module WLAPI
