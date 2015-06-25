@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake', '~> 10.3')
   s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.md']
   s.rdoc_options = ['-m', 'README.rdoc']
+  s.has_rdoc = 'yard'
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>=1.8.5'
   s.files = FileList['lib/**/*.rb',
