@@ -23,19 +23,15 @@ Gem::Specification.new do |s|
                   'Technology (HLT).'
   s.version = WLAPI::VERSION
   s.author = 'Andrei Beliankou'
-  s.email = 'arbox@bu.chsta.be'
+  s.email = 'arbox@yandex.ru'
   s.homepage = 'http://bu.chsta.be/projects/wlapi/'
   s.add_runtime_dependency('savon', '~> 2.1')
-  s.add_runtime_dependency('nori', '~> 2.4.0')
-  s.add_development_dependency('rdoc', '~> 4.1')
-  s.add_development_dependency('bundler', '~> 1.6')
-  s.add_development_dependency('yard', '~> 0.8')
-  s.add_development_dependency('rake', '~> 10.4')
+  s.add_runtime_dependency('nokogiri', '~>1.6')
   s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.md']
   s.rdoc_options = ['-m', 'README.rdoc']
   s.has_rdoc = 'yard'
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>=1.8.5'
+  s.required_ruby_version = '>=1.9.3'
   s.files = FileList['lib/**/*.rb',
                      'README.rdoc',
                      'LICENSE.rdoc',
@@ -44,4 +40,8 @@ Gem::Specification.new do |s|
                      'test/**/*'].to_a
   s.test_files = FileList['test/**/*'].to_a
   s.licenses = 'MIT'
+  s.cert_chain  = ['certificates/arbox.pem']
+  if $PROGRAM_NAME =~ /gem\z/
+    s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
+  end
 end

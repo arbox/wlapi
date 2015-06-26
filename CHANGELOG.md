@@ -1,4 +1,6 @@
 ## COMPLETED
+### 0.9.0
+Dropped support for `1.8.7`.
 ### 0.8.6
 Implemented <tt>ngrams</tt> and <tt>ngram_references</tt>.
 ### 0.8.5
@@ -25,5 +27,3 @@ Fixed the bug with a wrong dependency on the latest version of savon.
 Due to interface changes it depends now on <tt>0.7.9</tt>.
 ### 0.0.3
 Initial release of the lib.
-
-
