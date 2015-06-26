@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.email = "arbox@bu.chsta.be"
   s.homepage = 'http://bu.chsta.be/projects/wlapi/'
   s.add_runtime_dependency('savon', '~> 2.1')
+  s.add_runtime_dependency('nori', '~> 2.4.0')
   s.add_development_dependency('rdoc', '~> 4.1')
   s.add_development_dependency('bundler', '~> 1.6')
   s.add_development_dependency('yard', '~> 0.8')
