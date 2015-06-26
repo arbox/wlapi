@@ -8,11 +8,22 @@ require 'wlapi/version'
 Gem::Specification.new do |s|
   s.name = 'wlapi'
   # it is the description for 'gem list -d'
-  s.summary = 'WLAPI is a programmatic API for web services provided by the project Wortschatz, University of Leipzig. Use different linguistic services such as synonym and collocation search.'
-  s.description = 'WLAPI is a programmatic API for web services provided by the project Wortschatz, University of Leipzig. These services are a great source of linguistic knowledge for morphological, syntactic and semantic analysis of German both for traditional and Computational Linguistics (CL). Use this API to gain data on word frequencies, left and right neighbours, collocations and semantic similarity. Check it out if you are interested in Natural Language Processing (NLP) and Human Language Technology (HLT).'
+  s.summary = 'WLAPI is a programmatic API for web services provided by the'\
+              'project Wortschatz, University of Leipzig. Use different'\
+              'linguistic services such as synonym and collocation search.'
+  s.description = 'WLAPI is a programmatic API for web services provided'\
+                  'by the project Wortschatz, University of Leipzig. These'\
+                  'services are a great source of linguistic knowledge'\
+                  'for morphological, syntactic and semantic analysis'\
+                  'of German both for traditional and Computational'\
+                  'Linguistics (CL). Use this API to gain data on word'\
+                  'frequencies, left and right neighbours, collocations and'\
+                  'semantic similarity. Check it out if you are interested in'\
+                  'Natural Language Processing (NLP) and Human Language'\
+                  'Technology (HLT).'
   s.version = WLAPI::VERSION
-  s.author = "Andrei Beliankou"
-  s.email = "arbox@bu.chsta.be"
+  s.author = 'Andrei Beliankou'
+  s.email = 'arbox@bu.chsta.be'
   s.homepage = 'http://bu.chsta.be/projects/wlapi/'
   s.add_runtime_dependency('savon', '~> 2.1')
   s.add_runtime_dependency('nori', '~> 2.4.0')
