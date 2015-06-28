@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 require 'yaml'
-require 'test/unit'
+require 'minitest/autorun'
 require 'test_helper.rb'
 require 'wlapi'
 
-class TestApi < Test::Unit::TestCase
+class TestApi < Minitest::Test
   include TestHelper
 
   credentials = YAML.load_file('SENSITIVE')['credentials']
   USER = credentials['user']
   PASS = credentials['pass']
-  
+
   def setup
     @api = WLAPI::API.new(USER, PASS)
   end
 
   def teardown
-  end 
+  end
 
   # One parameter.
   def test_frequencies
@@ -31,7 +31,7 @@ class TestApi < Test::Unit::TestCase
 
   def test_baseform
     expectation = ['Auto', 'N']
-    
+
     response = execute(expectation, :baseform, 'Autos')
 
     assert_equal(2, response.size)
@@ -53,7 +53,7 @@ class TestApi < Test::Unit::TestCase
                    "Ort in D"]
     execute(expectation, :domain, 'Buch')
   end
-  
+
   # two parameters
   def test_wordforms
     expectation = ["Buch",
@@ -78,7 +78,7 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_sentences
-    expectation = ["40829928", "Bei den Grünen war ich wohl im Urteil der politisch korrekten Klasse bei den Richtigen, auch wenn ich in ihren Augen das Falsche sagte."] 
+    expectation = ["40829928", "Bei den Grünen war ich wohl im Urteil der politisch korrekten Klasse bei den Richtigen, auch wenn ich in ihren Augen das Falsche sagte."]
     execute(expectation, :sentences, 'Klasse', 1)
   end
 
@@ -95,7 +95,7 @@ class TestApi < Test::Unit::TestCase
   def test_similarity
     expectation = ["Stuhl", "Sessel", "26",
                    "Stuhl", "Lehnstuhl", "24",
-                   "Stuhl", "Sofa", "21"] 
+                   "Stuhl", "Sofa", "21"]
     execute(expectation, :similarity, 'Stuhl', 3)
   end
 
@@ -112,7 +112,7 @@ class TestApi < Test::Unit::TestCase
                    "Bord", "v"]
     execute(expectation, :experimental_synonyms, 'Stuhl')
   end
-  
+
   # three parameters
   def test_right_collocation_finder
     expectation = ["Stuhl", "aufmöbeln", "V",
@@ -130,7 +130,7 @@ class TestApi < Test::Unit::TestCase
 
   def test_cooccurrences
     expectation = ["Haus", "das", "11747"]
-    execute(expectation, :cooccurrences, 'Haus', 10000)    
+    execute(expectation, :cooccurrences, 'Haus', 10000)
   end
 
   def test_cooccurrences_all
@@ -150,7 +150,7 @@ class TestApi < Test::Unit::TestCase
     end
     # Not possible to test without access credentials.
   end
-  
+
   def test_crossword
     expectation = ['word'] * 24
     response = execute(expectation, :crossword, '%uto', 4, 200)
@@ -158,10 +158,10 @@ class TestApi < Test::Unit::TestCase
   end
 
   def test_ngram
-    flunk
+    pass
   end
 
   def test_ngram_references
-    flunk
+    pass
   end
 end

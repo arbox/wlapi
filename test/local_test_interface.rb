@@ -1,8 +1,8 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'test_helper'
 require 'wlapi'
 
-class TestInterface < Test::Unit::TestCase
+class TestInterface < Minitest::Test
   include TestHelper
 
   ONE_PAR = [:frequencies,
@@ -36,7 +36,7 @@ class TestInterface < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   # Test constants.
   def test_constants
     assert(WLAPI::VERSION.is_a?(String))
@@ -48,47 +48,47 @@ class TestInterface < Test::Unit::TestCase
   end
 
   def test_for_absent_arguments
-    assert_raise(ArgumentError) do
+    assert_raises(ArgumentError) do
       METHODS.each { |m| @api.send(m) }
     end
   end
 
   def test_for_redundant_arguments
 
-    assert_raise(ArgumentError) do
+    assert_raises(ArgumentError) do
       ONE_PAR.each { |m| @api.send(m, 'a', 2) }
     end
 
-    assert_raise(ArgumentError) do
+    assert_raises(ArgumentError) do
       TWO_PAR.each { |m| @api.send(m, 'a', 2, 3) }
     end
-    
 
-    assert_raise(ArgumentError) do
+
+    assert_raises(ArgumentError) do
       THREE_PAR.each { |m| @api.send(m, 'a', 'a', 3, 4) }
-    end    
+    end
   end
 
   def test_argument_semantics
-    assert_raise(WLAPI::UserError) do
+    assert_raises(WLAPI::UserError) do
       ONE_PAR.each { |m| @api.send(m, 1) }
     end
 
-    assert_raise(WLAPI::UserError) do
+    assert_raises(WLAPI::UserError) do
       TWO_PAR.each { |m| @api.send(m, 'Haus', [:a]) }
     end
 
-    assert_raise(WLAPI::UserError) do
+    assert_raises(WLAPI::UserError) do
       THREE_PAR.each { |m| @api.send(m, 3, 3.5, 'a') }
     end
   end
 
   def test_missing_methods
-    assert_raise(WLAPI::ExternalError) do
+    assert_raises(WLAPI::ExternalError) do
       @api.ngrams('Haus')
     end
 
-    assert_raise(WLAPI::ExternalError) do
+    assert_raises(WLAPI::ExternalError) do
       @api.ngram_references('Haus')
     end
   end

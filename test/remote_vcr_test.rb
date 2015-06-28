@@ -1,11 +1,11 @@
 # coding: utf-8
 require 'yaml'
-require 'test/unit'
+require 'minitest/autorun'
 require 'test_helper.rb'
 require 'vcr'
 require 'wlapi'
 
-class TestApi < Test::Unit::TestCase
+class TestApi < Minitest::Test
   include TestHelper
 
   credentials = YAML.load_file('SENSITIVE')['credentials']
@@ -17,7 +17,7 @@ class TestApi < Test::Unit::TestCase
   end
 
   def teardown
-  end 
+  end
 
   # VCR Test
   def test_test

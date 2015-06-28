@@ -6,7 +6,6 @@ VCR.configure do |c|
 end
 
 module TestHelper
-
   def execute(expectation, method, *args)
     begin
       result = VCR.use_cassette(method) do
@@ -18,7 +17,7 @@ module TestHelper
         result = expectation
         warn(error.message)
       else
-        raise        
+        raise
       end
     end
 
@@ -31,9 +30,8 @@ module TestHelper
   def check_input(*args)
   end
 
-  
   def check_response(response)
-    assert_not_nil(response)
+    refute_nil(response)
     assert_instance_of(Array, response)
     assert(response.any?)
   end
