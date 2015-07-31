@@ -7,6 +7,7 @@
 {<img src="https://img.shields.io/gem/v/wlapi.svg" alt="Gem Version" />}[https://rubygems.org/gems/wlapi]
 {<img src="https://img.shields.io/travis/arbox/wlapi.svg" alt="Build Status" />}[https://travis-ci.org/arbox/wlapi]
 {<img src="https://img.shields.io/codeclimate/github/arbox/wlapi.svg" alt="Code Climate" />}[https://codeclimate.com/github/arbox/wlapi]
+{<img src="https://img.shields.io/gemnasium/arbox/wlapi.svg" alt="Dependency Status" />}[https://gemnasium.com/arbox/wlapi]
 
 == DESCRIPTION
 WLAPI is a programmatic API for web services provided by the project
