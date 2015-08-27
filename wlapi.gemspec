@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.email = 'arbox@yandex.ru'
   s.homepage = 'http://bu.chsta.be/projects/wlapi/'
   s.add_runtime_dependency('savon', '~> 2.1')
-  s.add_runtime_dependency('nokogiri', '~>1.6', '>=1.6.6.2')
+  s.add_runtime_dependency('nokogiri', '~>1.6')
   s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.md']
   s.rdoc_options = ['-m', 'README.rdoc']
   s.has_rdoc = 'yard'
