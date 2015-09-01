@@ -1,5 +1,5 @@
 # -*- mode: ruby -*-
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gemspec
 
@@ -11,6 +11,7 @@ group :development do
   gem 'yard', '~> 0.8'
   gem 'rake', '~> 10.4'
   gem 'rubocop', '~> 0.3'
+  gem 'bundler-audit', '~> 0.4'
 end
 
 group :test do
