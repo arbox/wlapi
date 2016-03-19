@@ -11,7 +11,7 @@ group :development do
   gem 'yard', '~> 0.8'
   gem 'rake', '~> 11.1'
   gem 'rubocop', '~> 0.3'
-  gem 'bundler', '~> 1.11'
+  # gem 'bundler', '~> 1.11'
   gem 'bundler-audit', '~> 0.4'
 end
 
