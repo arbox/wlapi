@@ -54,7 +54,6 @@ class TestInterface < Minitest::Test
   end
 
   def test_for_redundant_arguments
-
     assert_raises(ArgumentError) do
       ONE_PAR.each { |m| @api.send(m, 'a', 2) }
     end
@@ -62,7 +61,6 @@ class TestInterface < Minitest::Test
     assert_raises(ArgumentError) do
       TWO_PAR.each { |m| @api.send(m, 'a', 2, 3) }
     end
-
 
     assert_raises(ArgumentError) do
       THREE_PAR.each { |m| @api.send(m, 'a', 'a', 3, 4) }

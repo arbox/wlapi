@@ -27,9 +27,6 @@ module TestHelper
     result
   end
 
-  def check_input(*args)
-  end
-
   def check_response(response)
     refute_nil(response)
     assert_instance_of(Array, response)

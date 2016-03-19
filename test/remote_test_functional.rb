@@ -130,12 +130,12 @@ class TestApi < Minitest::Test
 
   def test_cooccurrences
     expectation = ["Haus", "das", "11747"]
-    execute(expectation, :cooccurrences, 'Haus', 10000)
+    execute(expectation, :cooccurrences, 'Haus', 10_000)
   end
 
   def test_cooccurrences_all
     begin
-      execute(['Expected'], :cooccurrences_all, 'Haus', 10000)
+      execute(['Expected'], :cooccurrences_all, 'Haus', 10_000)
     rescue WLAPI::ExternalError => e
       assert_match(/You're not allowed to access this service./, e.message)
     end

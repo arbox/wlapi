@@ -33,15 +33,14 @@ YARD::Rake::YardocTask.new do |ydoc|
   ydoc.name = 'ydoc'
 end
 
-
 # Testing.
-#require 'rake/testtask'
-#Rake::TestTask.new do |t|
-#  t.libs << 'test'
-#  t.warning
-#  t.ruby_opts = ['-rubygems']
-#  t.test_files = FileList['test/*.rb']
-#end
+# require 'rake/testtask'
+# Rake::TestTask.new do |t|
+#   t.libs << 'test'
+#   t.warning
+#   t.ruby_opts = ['-rubygems']
+#   t.test_files = FileList['test/*.rb']
+# end
 
 namespace :test do
   interpreter = 'ruby -rubygems -I lib -I test'
@@ -53,13 +52,11 @@ namespace :test do
     sh "#{interpreter} test/remote_*"
   end
 
-  task :all => [:local, :remote]
+  task all: [:local, :remote]
 end
-
 
 desc 'Open an irb session preloaded with this library.'
 task :irb do
-#  sh 'irb -rubygems -I lib -r wlapi'
   require 'irb'
   require 'irb/completion'
   require 'wlapi'
@@ -81,10 +78,10 @@ task :v do
 end
 
 desc 'Document the code using Yard and RDoc.'
-task :doc => [:clobber, :rdoc, :ydoc]
+task doc: [:clobber, :rdoc, :ydoc]
 
 desc 'Release the library.'
-task :release => [:tag, :build, :publish] do
+task release: [:tag, :build, :publish] do
   sh "bundle exec gem push wlapi-#{WLAPI::VERSION}.gem"
 end
 
@@ -107,7 +104,7 @@ task :build do
 end
 
 desc 'Publish the documentation on the homepage.'
-task :publish => [:clobber, :doc] do
+task publish: [:clobber, :doc] do
   system "scp -r ydoc/* #{YAML.load_file('SENSITIVE')['url']}"
 end
 
