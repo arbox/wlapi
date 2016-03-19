@@ -9,7 +9,7 @@ group :development do
   gem 'pry', '~> 0.10'
   gem 'rdoc', '~> 4.2'
   gem 'yard', '~> 0.8'
-  gem 'rake', '~> 10.4'
+  gem 'rake', '~> 11.1'
   gem 'rubocop', '~> 0.3'
   gem 'bundler-audit', '~> 0.4'
 end

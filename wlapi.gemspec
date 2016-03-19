@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.email = 'arbox@yandex.ru'
   s.homepage = 'http://bu.chsta.be/projects/wlapi/'
   s.add_runtime_dependency('savon', '~> 2.1')
-  s.add_runtime_dependency('nokogiri', '~>1.6', '>= 1.6.5')
+  s.add_runtime_dependency('nokogiri', '~>1.6', '>= 1.6.7.2')
   s.extra_rdoc_files = ['README.rdoc', 'LICENSE.rdoc', 'CHANGELOG.md']
   s.rdoc_options = ['-m', 'README.rdoc']
   s.has_rdoc = 'yard'
@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
                      'test/**/*'].to_a
   s.test_files = FileList['test/**/*'].to_a
   s.licenses = 'MIT'
-  s.cert_chain  = ['certificates/arbox.pem']
+  s.cert_chain = ['certificates/arbox.pem']
   if $PROGRAM_NAME =~ /gem\z/
     s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
   end
