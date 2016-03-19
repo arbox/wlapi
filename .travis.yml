@@ -21,7 +21,9 @@ script: "bundle exec rake test:local"
 
 matrix:
   allow_failures:
-    - rvm: rbx-19mode
+    - rvm:
+        - rbx-19mode
+        - ruby-head
 
 notifications:
   email:
