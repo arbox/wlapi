@@ -5,7 +5,7 @@ gemspec
 
 group :development do
   gem 'flay', '~> 2.6'
-  gem 'travis-lint', '~> 2.0'
+  gem 'travis', '~> 1.8'
   gem 'pry', '~> 0.10'
   gem 'rdoc', '~> 4.2'
   gem 'yard', '~> 0.8'
