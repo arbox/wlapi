@@ -148,7 +148,7 @@ you might face some not implemented features.
 Please contact me with your suggestions, bug reports and feature requests.
 == LICENSE
 
-WLAPI is a copyrighted software by Andrei Beliankou, 2010-2014
+WLAPI is a copyrighted software by Andrei Beliankou, 2010-2016
 
 You may use, redistribute and change it under the terms provided
 in the LICENSE file.
