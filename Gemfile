@@ -14,6 +14,7 @@ group :development do
   gem 'rubocop', '~> 0.3'
   gem 'bundler', '~> 1.11'
   gem 'bundler-audit', '~> 0.4'
+  gem 'rainbow', '~> 2.2.2'
 end
 
 group :test do
