@@ -442,13 +442,13 @@ module WLAPI
         messages << msg(args[0], m, 'String') unless args[0].is_a?(String)
       when 2
         messages << msg(args[0], m, 'String') unless args[0].is_a?(String)
-        messages << msg(args[1], m, 'Numeric') unless args[1].is_a?(Integer)
+        messages << msg(args[1], m, 'Numeric') unless args[1].is_a?(Numeric)
       when 3
         messages << msg(args[0], m, 'String') unless args[0].is_a?(String)
-        unless args[1].is_a?(String) || args[1].is_a?(Integer)
+        unless args[1].is_a?(String) || args[1].is_a?(Numeric)
           messages << msg(args[1], m, 'String or Numeric')
         end
-        messages << msg(args[2], m, 'Numeric') unless args[2].is_a?(Integer)
+        messages << msg(args[2], m, 'Numeric') unless args[2].is_a?(Numeric)
       end
 
       if messages.any?
