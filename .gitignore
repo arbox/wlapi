@@ -10,3 +10,7 @@ doc
 .rvmrc
 Gemfile.lock
 .ruby-version
+.idea/modules.xml
+.idea/vcs.xml
+.idea/wlapi.iml
+.idea/workspace.xml
