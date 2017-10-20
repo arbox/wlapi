@@ -16,7 +16,7 @@ before_install:
 
 install: bundle install --without development
 
-script: "bundle exec rake test:local"
+script: "bundle exec rake test:local --trace"
 
 matrix:
   allow_failures:
