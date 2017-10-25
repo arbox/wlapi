@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rake', '~> 11.1', :group => [:development, :test]
+gem 'rake', '~> 12.2', '>= 12.2.1', group: [:development, :test]
 
 group :development do
   gem 'flay', '~> 2.6'
