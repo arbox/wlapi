@@ -27,12 +27,6 @@ RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
 end
 
-require 'yard'
-YARD::Rake::YardocTask.new do |ydoc|
-  ydoc.options += ['-o', 'ydoc']
-  ydoc.name = 'ydoc'
-end
-
 # Testing.
 # require 'rake/testtask'
 # Rake::TestTask.new do |t|
@@ -78,7 +72,13 @@ task :v do
 end
 
 desc 'Document the code using Yard and RDoc.'
-task doc: [:clobber, :rdoc, :ydoc]
+task doc: [:clobber, :rdoc, :ydoc] do
+  require 'yard'
+  YARD::Rake::YardocTask.new do |ydoc|
+    ydoc.options += ['-o', 'ydoc']
+    ydoc.name = 'ydoc'
+  end
+end
 
 desc 'Release the library.'
 task release: [:tag, :build, :publish] do
