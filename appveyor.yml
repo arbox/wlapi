@@ -1,5 +1,13 @@
+environment:
+  matrix:
+    - RUBY_VERSION: 193
+    - RUBY_VERSION: 200
+    - RUBY_VERSION: 218
+    - RUBY_VERSION: 224
+    - RUBY_VERSION: 23
+
 install:
-  - set PATH=C:\Ruby22\bin;%PATH%
+  - set PATH=C:\Ruby%RUBY_VERSION%\bin;%PATH%
   - bundle install
 
 build: off
