@@ -37,7 +37,7 @@ end
 # end
 
 namespace :test do
-  interpreter = 'ruby -rubygems -I lib -I test'
+  interpreter = 'ruby -I lib -I test'
   task :local do
     sh "#{interpreter} test/local_*"
   end
